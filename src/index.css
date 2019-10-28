@@ -1,1 +1,56 @@
-
+.grid { 
+    display: grid;
+   
+   grid-template-areas:
+  "header header header"
+  "nav content content";
+   grid-template-rows: 4fr 16fr;
+    grid-template-columns: 2fr 8fr;
+    grid-gap: 20px;
+    
+  }
+  .header {
+    grid-area: header;
+    background: #90EE90;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    }
+  .header img {
+    height: 40px;
+    width: 50px;
+    border-radius: 25px;
+  }
+  .navbar {
+    grid-area: nav;
+    background: #7FFF00;
+    height: 200;
+    padding: 10px;
+  }
+  .content {
+    grid-area: content;
+    background: #ADD8E6;
+  }
+  .profile_info img {
+    height: 160px;
+    border-radius: 15px;
+  }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  .dialogs {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+  }
+  .dialogs_items {
+    
+  }
+  .messages {
+    
+  }
+  
+  .my_posts {
+    padding: 10px;
+  }
+  
+  
