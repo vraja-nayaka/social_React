@@ -8,11 +8,11 @@ import { Route, BrowserRouter } from "react-router-dom";
 
 const App = (props) => (<BrowserRouter>
     <div className={index.grid}>
-    <Header />
-    <Navbar />
-    <Profile PostsData={props.PostsData}/>
-    <Dialogs DialogsData={props.DialogsData} MessagesData={props.MessagesData}/>
-        <a>helloWorld</a>
-    </div></BrowserRouter>)
+        <Header />
+        <Navbar />
+        <Route path='/profile' render={() => <Profile PostsData={props.PostsData} />} />
+        <Route path='/dialogs' render={() => <Dialogs DialogsData={props.DialogsData} MessagesData={props.MessagesData} />} />
+    </div>
+</BrowserRouter>)
 
 export default App 
