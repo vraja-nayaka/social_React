@@ -1,0 +1,12 @@
+.profile_info img {
+    height: 130px;
+    border-radius: 15px;
+  }
+
+.post {
+    margin: 10px;
+  }
+.post img {
+  height: 60px;
+  border-radius: 30px;
+}

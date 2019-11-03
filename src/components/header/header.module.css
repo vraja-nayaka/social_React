@@ -1,5 +1,13 @@
 .header {
-background-color: blueviolet;
-color: cornsilk;
-padding: 20px;
-}
+    grid-area: header;
+
+    background-color: blueviolet;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    }
+  .header img {
+    height: 40px;
+    width: 50px;
+    border-radius: 25px;
+  }
