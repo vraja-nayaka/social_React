@@ -12,12 +12,12 @@ const App = (props) => (
         <div className="content">
             <Route path='/profile' render={() =>
                 <Profile
-                    addPost={props.addPost}
-                    updateNewPostText={props.updateNewPostText}
+                    dispatch={props.dispatch}
                     profilePage={props.profilePage} />}
             />
             <Route path='/dialogs' render={() =>
                 <Dialogs
+                    dispatch={props.dispatch}
                     DialogsData={props.DialogsData}
                     MessagesData={props.MessagesData} />}
             />

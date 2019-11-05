@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './profile.module.css';
+import { addPostAC, updateNewPostTextAC } from '../../redux/state'
 
 const ProfileInfo = () => <div className={style.profile_info}>
     <img src="https://www.wallpapers.net/web/wallpapers/thailands-most-charming-seaside-resort-town-hd-wallpaper/thumbnail/lg.jpg" />
@@ -19,14 +20,15 @@ const MyPosts = (props) => {
     let PostsElements = props.posts.map(post => <Post message={post.message} likesCount={post.likesCount} />);
     let newPostElement = React.createRef();
     let addPost = () => {
-        props.addPost()
-    }
+        props.dispatch(addPostAC());
+    };
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.updateNewPostText(text);
-    }
-
-    return <div >
+        //     let action = { type: 'UPDATE-NEW-POST-TEXT', newText: text}
+        let action = updateNewPostTextAC(text);
+        props.dispatch(action);
+    };
+    return <div>
         <h3>My posts</h3>
         <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}></textarea>
         <button onClick={addPost}>Опубликовать</button>
@@ -38,10 +40,9 @@ const MyPosts = (props) => {
 const Profile = (props) => {
     return <div>
         <ProfileInfo />
-        <MyPosts posts={props.profilePage.posts} 
-        addPost={props.addPost} 
-        updateNewPostText={props.updateNewPostText}
-        newPostText={props.profilePage.newPostText}
+        <MyPosts posts={props.profilePage.posts}
+            dispatch={props.dispatch}
+            newPostText={props.profilePage.newPostText}
         />
     </div>
 };
