@@ -18,4 +18,8 @@ export const dialogsReducer = (state, action) => {
       return state;
       }
 }
+
+export const updateNewMessageBodyAC = (body) => ({ type: UPDATE_NEW_MESSAGE_BODY, body: body });
+export const sendMessageAC = () => ({ type: SEND_MESSAGE });
+
 export default dialogsReducer

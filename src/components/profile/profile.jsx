@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './profile.module.css';
-import { addPostAC, updateNewPostTextAC } from '../../redux/state'
+import { addPostAC, updateNewPostTextAC } from '../../redux/profile-reducer'
 
 const ProfileInfo = () => <div className={style.profile_info}>
     <img src="https://www.wallpapers.net/web/wallpapers/thailands-most-charming-seaside-resort-town-hd-wallpaper/thumbnail/lg.jpg" />
@@ -30,7 +30,7 @@ const MyPosts = (props) => {
     };
     return <div>
         <h3>My posts</h3>
-        <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}></textarea>
+        <textarea onChange={onPostChange} ref={newPostElement} placeholder='Введите текст поста' value={props.newPostText}></textarea>
         <button onClick={addPost}>Опубликовать</button>
         <div> {PostsElements} </div>
     </div>

@@ -1,11 +1,11 @@
 import React from 'react';
 import dialogs from './dialogs.module.css';
 import { NavLink } from "react-router-dom";
-import { sendMessageAC, updateNewMessageBodyAC } from '../../redux/state'
+import { sendMessageAC, updateNewMessageBodyAC } from '../../redux/dialogs-reducer'
 
 const Dialog = (props) => {
   let pathLink = "/dialogs/" + props.id;
-  return <NavLink to={pathLink}>{props.name}</NavLink>
+  return <div><NavLink to={pathLink}>{props.name}</NavLink></div>
 };
 
 const Message = (props) => {
