@@ -2,24 +2,21 @@ import React from 'react';
 import Header from './components/header/header';
 import Navbar from './components/navbar/navbar';
 import Profile from './components/profile/profile';
-import Dialogs from './components/dialogs/dialogs';
+import DialogsContainer from './components/dialogs/DialogsContainer';
 import { Route } from "react-router-dom";
 
 const App = (props) => (
     <div className="grid">
         <Header />
-        <Navbar friends={props.DialogsData} />
+        <Navbar friends={props.store.getState().DialogsPage} />
         <div className="content">
             <Route path='/profile' render={() =>
                 <Profile
-                    dispatch={props.dispatch}
-                    profilePage={props.profilePage} />}
+                    store={props.store}/>}
             />
             <Route path='/dialogs' render={() =>
-                <Dialogs
-                    dispatch={props.dispatch}
-                    DialogsData={props.DialogsData}
-                    MessagesData={props.MessagesData} />}
+                <DialogsContainer
+                    store={props.store}/>}
             />
         </div>
     </div>
