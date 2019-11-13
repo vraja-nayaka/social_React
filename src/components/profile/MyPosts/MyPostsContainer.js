@@ -12,7 +12,10 @@ const MyPostsContainer = (props) => {
         let action = updateNewPostTextAC(text);
         props.store.dispatch(action);
     };
-    return <MyPosts updateNewPostText={onPostChange} addPost={onAddPost} posts={props.posts} newPostText={state.profilePage.newPostText}/>
+    return <MyPosts updateNewPostText={onPostChange} 
+    addPost={onAddPost} 
+    posts={state.profilePage.posts} 
+    newPostText={state.profilePage.newPostText}/>
 };
 
 export default MyPostsContainer 

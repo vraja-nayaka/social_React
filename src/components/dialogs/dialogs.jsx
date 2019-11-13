@@ -12,21 +12,21 @@ const Message = (props) => {
 };
 
 const Dialogs = (props) => {
-  let DialogsElements = props.DialogsData.map(dialog => <Dialog name={dialog.name} id={dialog.id} />);
-  let MessagesElements = props.MessagesData.map(message => <Message message={message.message} id={message.id} />);
-  let onSendMessageClikc = (text) => {
-    props.sendMessage(text);
-  };
-
-  let body = (e)=>e.target.value;
+  let DialogsElements = props.dialogsPage.dialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} />);
+  let MessagesElements = props.dialogsPage.messages.map(message => <Message message={message.message} id={message.id} />);
+debugger
+let onNewMessageChange = (e) => {
+  let body = e.target.value;
   props.updateNewMessageBody(body);
-
+}
   return <div className="dialogs">
     <div className="dialogs_items"> {DialogsElements} </div>
     <div className="messages"> {MessagesElements}
-      <textarea placeholder='Введите Ваше сообщение' onChange={props.onNewMessageChange} value={props.newMessageBody}></textarea>
+      <textarea placeholder='Введите Ваше сообщение' 
+      onChange={onNewMessageChange} 
+      value={props.state.newMessageBody}></textarea>
       <button
-        onClick={props.onSendMessageClikc}>Опубликовать</button>
+        onClick={props.sendMessage}>Опубликовать</button>
     </div>
   </div>
 };
