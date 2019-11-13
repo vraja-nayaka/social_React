@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './navbar.module.css';
 import { NavLink } from "react-router-dom";
-import StoreContext from "../../StoreContext";
+import { connect } from "react-redux";
 
 const Friends = (props) => {
     return <div className={style.friendsBar}>
@@ -24,7 +24,7 @@ const Friend = (props) => {
         <a>{props.friendName}</a>
     </div>
 }
-
+/*
 const Navbar = () => {
     return <StoreContext.Consumer>
         { store => {
@@ -40,5 +40,23 @@ const Navbar = () => {
         }
     </StoreContext.Consumer>
 };
+*/
+let mapStateToProps = (state) => {
+    return {
+        friends: state.dialogsPage.dialogs
+    }
+}
 
-export default Navbar
+const Navbar = (props) => {
+            return <div className={style.navbar}>
+                <div className={style.item}><NavLink to="/profile" activeClassName={style.activeLink}>Profile</NavLink></div>
+                <div className={style.item}><NavLink to="/dialogs" activeClassName={style.activeLink}>Dialogs</NavLink></div>
+                <div className={style.item}><NavLink to="/news" activeClassName={style.activeLink}>News</NavLink></div>
+                <div className={style.item}><NavLink to="/music" activeClassName={style.activeLink}>Music</NavLink></div>
+                <div className={style.item}><NavLink to="/settings" activeClassName={style.activeLink}>Settings</NavLink></div>
+                <Friends className={style.friends} friends={props.friends} />
+            </div>
+};
+
+const NavbarConteiner = connect(mapStateToProps)(Navbar);
+export default NavbarConteiner

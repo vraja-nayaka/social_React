@@ -12,19 +12,19 @@ const Message = (props) => {
 };
 
 const Dialogs = (props) => {
-  let DialogsElements = props.dialogsPage.dialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} />);
-  let MessagesElements = props.dialogsPage.messages.map(message => <Message message={message.message} id={message.id} />);
-debugger
+  let DialogsElements = props.dialogsPage.dialogs.map(dialog => <Dialog name={dialog.name} key={dialog.id} id={dialog.id} />);
+  let MessagesElements = props.dialogsPage.messages.map(message => <Message message={message.message} key={message.id} id={message.id} />);
 let onNewMessageChange = (e) => {
   let body = e.target.value;
   props.updateNewMessageBody(body);
 }
+debugger
   return <div className="dialogs">
     <div className="dialogs_items"> {DialogsElements} </div>
     <div className="messages"> {MessagesElements}
       <textarea placeholder='Введите Ваше сообщение' 
       onChange={onNewMessageChange} 
-      value={props.state.newMessageBody}></textarea>
+      value={props.dialogsPage.newMessageBody}></textarea>
       <button
         onClick={props.sendMessage}>Опубликовать</button>
     </div>

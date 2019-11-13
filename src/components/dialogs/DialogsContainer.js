@@ -1,9 +1,9 @@
 import React from 'react';
 import { sendMessageAC, updateNewMessageBodyAC } from '../../redux/dialogs-reducer'
 import Dialogs from './dialogs';
-import StoreContext from '../../StoreContext';
+import { connect } from "react-redux"
 
-const DialogsContainer = () => {
+/*const DialogsContainerOld = () => {
   return (
     <StoreContext.Consumer>
       {
@@ -25,7 +25,24 @@ const DialogsContainer = () => {
         }
       }
     </StoreContext.Consumer>)
+}*/
+
+let mapStateToProps = (state) => {
+  return {
+    dialogsPage: state.dialogsPage
+  }
 }
 
+let mapDispatchToProps = (dispatch) => {
+  return {
+    sendMessage: () => {
+      dispatch(sendMessageAC());
+    },
+    updateNewMessageBody: (body) => {
+      dispatch(updateNewMessageBodyAC(body));
+    }
+  }
+}
 
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 export default DialogsContainer 
