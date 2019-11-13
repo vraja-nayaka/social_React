@@ -7,15 +7,13 @@ import { Route } from "react-router-dom";
 
 const App = (props) => (<div className="grid">
     <Header />
-    <Navbar friends={props.store._state.dialogsPage.dialogs} />
+    <Navbar />
     <div className="content">
         <Route path='/profile' render={() =>
-            <Profile
-                store={props.store} />}
+            <Profile/>}
         />
         <Route path='/dialogs' render={() =>
-            <DialogsContainer
-                store={props.store} />}
+            <DialogsContainer/>}
         />
     </div>
 </div>
