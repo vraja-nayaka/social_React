@@ -24,8 +24,7 @@ const Friend = (props) => {
         <a>{props.friendName}</a>
     </div>
 }
-/*
-const Navbar = () => {
+/*const Navbar = () => {
     return <StoreContext.Consumer>
         { store => {
             return <div className={style.navbar}>
@@ -48,14 +47,15 @@ let mapStateToProps = (state) => {
 }
 
 const Navbar = (props) => {
-            return <div className={style.navbar}>
-                <div className={style.item}><NavLink to="/profile" activeClassName={style.activeLink}>Profile</NavLink></div>
-                <div className={style.item}><NavLink to="/dialogs" activeClassName={style.activeLink}>Dialogs</NavLink></div>
-                <div className={style.item}><NavLink to="/news" activeClassName={style.activeLink}>News</NavLink></div>
-                <div className={style.item}><NavLink to="/music" activeClassName={style.activeLink}>Music</NavLink></div>
-                <div className={style.item}><NavLink to="/settings" activeClassName={style.activeLink}>Settings</NavLink></div>
-                <Friends className={style.friends} friends={props.friends} />
-            </div>
+    return <div className={style.navbar}>
+        <div className={style.item}><NavLink to="/profile" activeClassName={style.activeLink}>Profile</NavLink></div>
+        <div className={style.item}><NavLink to="/dialogs" activeClassName={style.activeLink}>Dialogs</NavLink></div>
+        <div className={style.item}><NavLink to="/news" activeClassName={style.activeLink}>News</NavLink></div>
+        <div className={style.item}><NavLink to="/music" activeClassName={style.activeLink}>Music</NavLink></div>
+        <div className={style.item}><NavLink to="/settings" activeClassName={style.activeLink}>Settings</NavLink></div>
+        <div className={style.item}><NavLink to="/users" activeClassName={style.activeLink}>Users</NavLink></div>
+        <Friends className={style.friends} friends={props.friends} />
+    </div>
 };
 
 const NavbarConteiner = connect(mapStateToProps)(Navbar);
