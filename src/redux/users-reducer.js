@@ -1,30 +1,14 @@
 const UNFOLLOW = 'UNFOLLOW';
 const FOLLOW = 'FOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
 let initialState = {
-  users: [
-//     {
-//     id: 1, avatarUrl: 'https://pbs.twimg.com/profile_images/893851949849882627/W3MH-3xd_400x400.jpg',
-//     followed: false, fullName: 'Dmitry', status: 'I am a boss', location: { city: 'Moscov', country: 'Russia' }
-// },
-// {
-//     id: 2, avatarUrl: 'https://pbs.twimg.com/media/Cl5Gor9WMAA8dVI.jpg',
-//     followed: true, fullName: 'Vadik', status: 'I am a boss too', location: { city: 'Khabarovsk', country: 'Russia' }
-// },
-// {
-//     id: 3, avatarUrl: 'https://pbs.twimg.com/profile_images/893851949849882627/W3MH-3xd_400x400.jpg',
-//     followed: false, fullName: 'John', status: 'I am a king', location: { city: 'New York', country: 'USA' }
-// },
-// {
-//     id: 4, avatarUrl: 'https://pbs.twimg.com/profile_images/893851949849882627/W3MH-3xd_400x400.jpg',
-//     followed: false, fullName: 'Rajesh', status: 'I am a yogi', location: { city: 'Vrindavan', country: 'India' }
-// },
-// {
-//     id: 5, avatarUrl: 'https://pbs.twimg.com/profile_images/893851949849882627/W3MH-3xd_400x400.jpg',
-//     followed: false, fullName: 'Leha', status: 'Good luck', location: { city: 'Ufa', country: 'Russia' }
-// }
-]
+  users: [],
+  pageSize: 10,
+  totalUsersCount: 50,
+  currentPage: 1
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -51,17 +35,24 @@ const usersReducer = (state = initialState, action) => {
         }
         )
       };
-    case SET_USERS: {
-      let a = action.users
-      debugger;
-      return { ...state, users: action.users }
-    }
-    default:
+      case SET_USERS: {
+        let a = action.users
+        return { ...state, users: action.users }
+      }
+      case SET_CURRENT_PAGE: {
+        return { ...state, currentPage: action.currentPage }
+      }
+      case SET_TOTAL_USERS_COUNT: {
+        return { ...state, totalUsersCount: action.totalUsersCount }
+      }
+      default:
       return state;
   }
 };
 
-export const followAC = (id) => ({ type: FOLLOW, userId: id });
-export const unfollowAC = (id) => ({ type: UNFOLLOW, userId: id });
-export const setUsersAC = (users) => ({ type: SET_USERS, users: users });
+export const followAC = (userId) => ({ type: FOLLOW, userId });
+export const unfollowAC = (userId) => ({ type: UNFOLLOW, userId });
+export const setUsersAC = (users) => ({ type: SET_USERS, users });
+export const setCurrentPageAC = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
+export const setTotalUsersCountAC = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount });
 export default usersReducer
