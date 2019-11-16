@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './components/header/header';
-import Profile from './components/profile/profile';
+import ProfileContainer from './components/profile/ProfileContainer';
 import DialogsContainer from './components/dialogs/DialogsContainer';
 import { Route } from "react-router-dom";
 import NavbarConteiner from './components/navbar/navbar';
@@ -11,7 +11,7 @@ const App = () => (<div className="grid">
     <NavbarConteiner />
     <div className="content">
         <Route path='/profile' render={() =>
-            <Profile/>}
+            <ProfileContainer/>}
         />
         <Route path='/dialogs' render={() =>
             <DialogsContainer/>}
