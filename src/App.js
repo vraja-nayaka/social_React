@@ -5,12 +5,13 @@ import DialogsContainer from './components/dialogs/DialogsContainer';
 import { Route } from "react-router-dom";
 import NavbarConteiner from './components/navbar/navbar';
 import UsersContainer from './components/users/UsersContainer';
+import HeaderContainer from './components/header/HeaderContainer';
 
 const App = () => (<div className="grid">
-    <Header />
+    <HeaderContainer />
     <NavbarConteiner />
     <div className="content">
-        <Route path='/profile' render={() =>
+        <Route path='/profile/:userId?' render={() =>
             <ProfileContainer/>}
         />
         <Route path='/dialogs' render={() =>

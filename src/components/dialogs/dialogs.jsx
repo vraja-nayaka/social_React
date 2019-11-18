@@ -18,7 +18,6 @@ const Dialogs = (props) => {
     let body = e.target.value;
     props.updateNewMessageBody(body);
   }
-  debugger
   return <div className={s.wrapper}>
     <div className={s.dialogs_bar}> {DialogsElements} </div>
     <div className={s.messages}> {MessagesElements}
