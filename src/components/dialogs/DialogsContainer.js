@@ -3,33 +3,11 @@ import { sendMessageAC, updateNewMessageBodyAC } from '../../redux/dialogs-reduc
 import Dialogs from './dialogs';
 import { connect } from "react-redux"
 
-/*const DialogsContainerOld = () => {
-  return (
-    <StoreContext.Consumer>
-      {
-        (store) => {
-          let state = store.getState().dialogsPage;
-
-          let onSendMessageClikc = () => {
-            store.dispatch(sendMessageAC());
-          };
-
-          let onNewMessageChange = (body) => {
-            store.dispatch(updateNewMessageBodyAC(body));
-          };
-
-          return <Dialogs state={state}
-            sendMessage={onSendMessageClikc}
-            updateNewMessageBody={onNewMessageChange}
-            dialogsPage={state} />
-        }
-      }
-    </StoreContext.Consumer>)
-}*/
 
 let mapStateToProps = (state) => {
   return {
-    dialogsPage: state.dialogsPage
+    dialogsPage: state.dialogsPage,
+    isAuth: state.auth.isAuth
   }
 }
 
