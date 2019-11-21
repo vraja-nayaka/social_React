@@ -1,9 +1,10 @@
 import React from 'react';
 import style from './../profile.module.css';
-import Preloader from './../../common/preloader/Preloader'
-import Vk from './../../../asets/images/icon/vk.svg'
-import Twitter from './../../../asets/images/icon/twitter.svg'
-import Facebook from './../../../asets/images/icon/facebook.svg'
+import Preloader from './../../common/preloader/Preloader';
+import Vk from './../../../asets/images/icon/vk.svg';
+import Twitter from './../../../asets/images/icon/twitter.svg';
+import Facebook from './../../../asets/images/icon/facebook.svg';
+import ProfileStatus from './ProfileStatus';
 
 
 const ProfileInfo = (props) => {
@@ -12,7 +13,9 @@ const ProfileInfo = (props) => {
     }
     return <div className={style.profile_info}>
         <img src="https://www.wallpapers.net/web/wallpapers/thailands-most-charming-seaside-resort-town-hd-wallpaper/thumbnail/lg.jpg" />
-        <div> <img src={props.profile.photos.large} /></div>
+        <div> <img src={props.profile.photos.large} />
+        <ProfileStatus status="hello"/>
+        </div>
         <div> {props.profile.fullName}</div>
         <div> {`Обо мне: ${(!props.profile.aboutMe) ? '' : props.profile.aboutMe}`}</div>
         <div>
