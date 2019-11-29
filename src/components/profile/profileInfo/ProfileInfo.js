@@ -12,8 +12,8 @@ const ProfileInfo = (props) => {
         return <Preloader />
     }
     return <div className={style.profile_info}>
-        <img src="https://www.wallpapers.net/web/wallpapers/thailands-most-charming-seaside-resort-town-hd-wallpaper/thumbnail/lg.jpg" />
-        <div> <img src={props.profile.photos.large} />
+        <img alt="пляж" src="https://www.wallpapers.net/web/wallpapers/thailands-most-charming-seaside-resort-town-hd-wallpaper/thumbnail/lg.jpg" />
+        <div> <img alt="аватар" src={props.profile.photos.large} />
         <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
         </div>
         <div> {props.profile.fullName}</div>
@@ -23,9 +23,9 @@ const ProfileInfo = (props) => {
             <div> {props.profile.lookingForAJobDescription}</div>
         </div>
         <div className={style.icon}> Контактные данные:
-        <div><a href={props.profile.contacts.facebook}> <img src={Facebook} />{props.profile.contacts.facebook}</a></div>
-            <div><a href={props.profile.contacts.vk}> <img src={Vk} />{props.profile.contacts.vk}</a></div>
-            <div><a href={props.profile.contacts.twitter}> <img src={Twitter} />{props.profile.contacts.twitter}</a></div>
+        <div><a href={props.profile.contacts.facebook}> <img alt="FacebookIcon" src={Facebook} />{props.profile.contacts.facebook}</a></div>
+            <div><a href={props.profile.contacts.vk}> <img alt="VkIcon" src={Vk} />{props.profile.contacts.vk}</a></div>
+            <div><a href={props.profile.contacts.twitter}> <img alt="TwitterIcon" src={Twitter} />{props.profile.contacts.twitter}</a></div>
         </div>
     </div >;
 }
