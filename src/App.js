@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './components/header/header';
 import ProfileContainer from './components/profile/ProfileContainer';
 import DialogsContainer from './components/dialogs/DialogsContainer';
 import { Route } from "react-router-dom";
