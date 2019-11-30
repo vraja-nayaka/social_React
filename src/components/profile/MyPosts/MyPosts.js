@@ -1,6 +1,7 @@
 import React from 'react';
 import style from '../profile.module.css';
 import { Field, reduxForm } from 'redux-form';
+import { required, maxLength30, Textarea } from '../../../utils/validators';
 
 const Post = (props) => {
     return <div className={style.post}>
@@ -28,9 +29,11 @@ const Form = (props) => {
     return <form onSubmit={props.handleSubmit}>
         <Field
             name="newPostText"
-            component="input"
+            component={Textarea}
+            validate={[required, maxLength30]}
+            label="Отправить новый пост"
             type="text"
-            placeholder='Введите текст поста'>
+            placeholder="Введите текст поста">
         </Field>
         <button type="submit">Опубликовать</button>
     </form>

@@ -2,6 +2,7 @@ import React from 'react';
 import s from './dialogs.module.css';
 import { NavLink } from "react-router-dom";
 import { Field, reduxForm } from 'redux-form';
+import { required, maxLength30, Textarea } from './../../utils/validators';
 
 const Dialog = (props) => {
   let pathLink = "/dialogs/" + props.id;
@@ -31,7 +32,10 @@ const AddMessageForm = (props) => {
     onSubmit={props.handleSubmit}
   >
     <Field placeholder="Введите Ваше сообщение"
-      name="newMessage" component="input" type="text">
+      component={Textarea}
+      validate={[required, maxLength30]}
+      name="newMessage" type="text"
+    >
     </Field>
     <button type="submit">Опубликовать</button>
   </form>

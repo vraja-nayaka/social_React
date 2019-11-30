@@ -51,7 +51,7 @@
 .new_message_line {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    background: rgb(100, 100, 100);
+    background: rgb(180, 200, 200);
     align-self: end;
 }
 
