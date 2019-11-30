@@ -2,12 +2,14 @@ import React from 'react';
 
 import { Field, reduxForm } from 'redux-form'
 import { Input, required } from './../../utils/validators';
+import { login } from './../../redux/auth-reducer';
+import { connect } from 'react-redux';
 
 const LoginForm = (props) => {
   return (
   <form onSubmit={props.handleSubmit} > 
       <div>
-        <Field name="login" component={Input} placeholder={"Login"}
+        <Field name="email" component={Input} placeholder={"email"}
         validate={[required]}/>
       </div>
             <div>
@@ -29,7 +31,7 @@ const LoginForm = (props) => {
   
 const Login = (props) => {
   let onSubmit = (data) => {
-    console.log(data)
+    props.login(data)
   }
     return (<>
     <h1>login</h1>
@@ -37,6 +39,17 @@ const Login = (props) => {
       </>
       )
 }
+let mapStateToProps = () => {
+  return {      }
+}
+let mapDispatchToProps = (dispatch) => {
+  return {
+    login: (email, password, rememberMe, captcha) => {
+      dispatch(login(email, password, rememberMe, captcha));
+    },
+  }
+}
+const LoginWithDispatch = connect(mapStateToProps, mapDispatchToProps)(Login)
 
-export default Login
+export default LoginWithDispatch
 // этот логин нужно законектить к стору и диспатчить
