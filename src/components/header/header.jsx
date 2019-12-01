@@ -2,12 +2,13 @@ import React from 'react';
 import style from './header.module.css';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../../redux/auth-reducer';
+import { connect } from 'react-redux';
 
 const Header = (props) => {
 
     let AtLogin = () => {
         return <div>{props.login}
-            <button onClick={logout()}>logout</button>
+            <button onClick={props.logout}>logout</button>
         </div>
     }
 
@@ -22,4 +23,4 @@ const Header = (props) => {
     </div>
 };
 
-export default Header
+export default connect(null, {logout})(Header)

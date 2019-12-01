@@ -4,44 +4,51 @@ import { Field, reduxForm } from 'redux-form'
 import { Input, required } from './../../utils/validators';
 import { login } from './../../redux/auth-reducer';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 const LoginForm = (props) => {
   return (
-  <form onSubmit={props.handleSubmit} > 
+    <form onSubmit={props.handleSubmit} >
       <div>
         <Field name="email" component={Input} placeholder={"email"}
-        validate={[required]}/>
+          validate={[required]} />
       </div>
-            <div>
+      <div>
         <Field name="password" component={Input} placeholder={"Password"}
-        validate={[required]}/>
+          validate={[required]} />
       </div>
       <div>
         <Field name="rememberMe" component={Input} type={"checkbox"}
         /> remember me
       </div>
- <div>
+      <div>
         <button>Login</button>
       </div>
-</form>
-)
-  }
+    </form>
+  )
+}
 
-  const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
-  
+const LoginReduxForm = reduxForm({ form: 'login' })(LoginForm)
+
 const Login = (props) => {
   let onSubmit = (data) => {
     props.login(data)
   }
-    return (<>
+  if (props.isAuth) {
+    return <Redirect to={"/profile"} />
+  }
+
+  return (<>
     <h1>login</h1>
-      <LoginReduxForm onSubmit={onSubmit}/>
-      </>
-      )
+    <LoginReduxForm onSubmit={onSubmit} />
+  </>
+  )
 }
-let mapStateToProps = () => {
-  return {      }
-}
+
+let mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth
+})
+
 let mapDispatchToProps = (dispatch) => {
   return {
     login: (email, password, rememberMe, captcha) => {
