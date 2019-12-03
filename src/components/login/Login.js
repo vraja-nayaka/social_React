@@ -11,11 +11,11 @@ const LoginForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit} >
       <div>
-        <Field name="email" component={Input} placeholder={"email"}
+        <Field name="email" type="text" label="Email address" component={Input} placeholder={"Enter your email"}
           validate={[required]} />
       </div>
       <div>
-        <Field name="password" component={Input} placeholder={"Password"}
+        <Field name="password" type="password" label="Password" component={Input} placeholder={"Enter your pass"}
           validate={[required]} />
       </div>
       <div>

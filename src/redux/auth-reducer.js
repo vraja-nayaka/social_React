@@ -44,7 +44,7 @@ export const login = ({ email, password, rememberMe, captcha }) => (dispatch) =>
         let { userId } = response.data;
         dispatch(getAuthUserData(userId));
       } else {
-        let message = response.data.messeges.length > 0 ? response.data.messeges[0] : "Some error";
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
         dispatch(stopSubmit("login", {_error: message}));
       }
     })

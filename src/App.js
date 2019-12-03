@@ -6,10 +6,10 @@ import NavbarConteiner from "./components/navbar/navbar";
 import UsersContainer from "./components/users/UsersContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
 import LoginPage from "./components/login/Login";
-import Preloader from "./asets/images/preloader.svg";
 import { initializeApp } from "./redux/app-reducer";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import Preloader from './components/common/preloader/Preloader';
 
 class App extends React.Component {
   componentDidMount() {
@@ -17,11 +17,9 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.props.initialized)
     if (!this.props.initialized) {
-      return <Preloader />;
-    }
-
+      return <Preloader/>;
+    } 
     return (
       <div className="grid">
         <HeaderContainer />
@@ -34,8 +32,8 @@ class App extends React.Component {
         </div>
       </div>
     );
+    }
   }
-}
 
 const mapStateToProps = state => ({
   initialized: state.app.initialized
