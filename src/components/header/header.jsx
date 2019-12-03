@@ -1,8 +1,6 @@
 import React from 'react';
 import style from './header.module.css';
 import { NavLink } from 'react-router-dom';
-import { logout } from '../../redux/auth-reducer';
-import { connect } from 'react-redux';
 
 const Header = (props) => {
 
@@ -23,4 +21,4 @@ const Header = (props) => {
     </div>
 };
 
-export default connect(null, {logout})(Header)
+export default Header
