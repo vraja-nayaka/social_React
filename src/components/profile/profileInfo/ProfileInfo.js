@@ -4,7 +4,7 @@ import Preloader from './../../common/preloader/Preloader';
 import Vk from './../../../asets/images/icon/vk.svg';
 import Twitter from './../../../asets/images/icon/twitter.svg';
 import Facebook from './../../../asets/images/icon/facebook.svg';
-import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 
 const ProfileInfo = (props) => {
@@ -14,7 +14,7 @@ const ProfileInfo = (props) => {
     return <div className={style.profile_info}>
         <img alt="пляж" src="https://www.wallpapers.net/web/wallpapers/thailands-most-charming-seaside-resort-town-hd-wallpaper/thumbnail/lg.jpg" />
         <div> <img alt="аватар" src={props.profile.photos.large} />
-        <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+        <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
         </div>
         <div> {props.profile.fullName}</div>
         <div> {`Обо мне: ${(!props.profile.aboutMe) ? '' : props.profile.aboutMe}`}</div>
