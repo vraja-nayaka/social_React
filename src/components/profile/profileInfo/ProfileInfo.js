@@ -13,8 +13,8 @@ const ProfileInfo = (props) => {
     }
     return <div className={style.profile_info}>
         <img alt="пляж" src="https://www.wallpapers.net/web/wallpapers/thailands-most-charming-seaside-resort-town-hd-wallpaper/thumbnail/lg.jpg" />
-        <div> <img alt="аватар" src={props.profile.photos.large} />
-        <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
+        <div> <img alt="[no-аватар]" src={props.profile.photos.large} />
+            <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
         </div>
         <div> {props.profile.fullName}</div>
         <div> {`Обо мне: ${(!props.profile.aboutMe) ? '' : props.profile.aboutMe}`}</div>

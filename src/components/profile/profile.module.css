@@ -16,3 +16,8 @@
 .icon {
 
 }
+
+.status {
+  color: yellow;
+  background-color: rgb(37, 90, 238);
+}
