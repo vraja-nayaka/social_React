@@ -3,7 +3,7 @@ import style from './users.module.css';
 import noAvatar from '../../asets/images/noAvatar.jpg';
 import { NavLink } from 'react-router-dom';
 
-const Users = (props) => {
+const Pagenation = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [1];
     let startingPage = props.currentPage === 1 ? 2 : props.currentPage
@@ -12,17 +12,28 @@ const Users = (props) => {
     };
     pages.push(pagesCount);
     return <div>
+        <button> Предыдущие </button>
+        <PageNumbers {...props} pages={pages}/>
+        <button> Следующие </button>
+    </div>
+}
+
+const PageNumbers = (props) => {
+    return props.pages.map(p => {
+        return <span
+            className={props.currentPage === p && style.selectedPage}
+            onClick={(e) => {
+                props.onPageChanged(p);
+            }}
+            > {p} </span>
+    });
+}
+
+const Users = (props) => {
+
+    return <div>
         <div className={style.container}>
-            <div>
-                {pages.map(p => {
-                    return <span
-                        className={props.currentPage === p && style.selectedPage}
-                        onClick={(e) => {
-                            props.onPageChanged(p);
-                        }}> {`${p}..`} </span>
-                })
-                }
-            </div>
+            <Pagenation {...props} />
             {props.users.map(u => <div className={style.users} >
                 <NavLink to={'/profile/' + u.id}>
                     <img src={u.photos.small != null ? u.photos.small : noAvatar}></img>

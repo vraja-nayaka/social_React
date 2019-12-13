@@ -31,6 +31,7 @@ class UsersAPIComponent extends React.Component {
   onPageChanged = (pageNumber) => {
     this.props.requestUsers(pageNumber, this.props.pageSize);
   }
+
   render() {
     return <>
       {this.props.isFetching ? <Preloader /> : null}
@@ -49,16 +50,6 @@ class UsersAPIComponent extends React.Component {
   }
 }
 
-// let mapStateToProps = (state) => {
-//   return {
-//     users: getUsers(state),
-//     pageSize: state.usersPage.pageSize,
-//     totalUsersCount: state.usersPage.totalUsersCount,
-//     currentPage: state.usersPage.currentPage,
-//     isFetching: state.usersPage.isFetching,
-//     followingInProgress: state.usersPage.followingInProgress
-//   }
-// }
 
 let mapStateToProps = (state) => {
   return {
