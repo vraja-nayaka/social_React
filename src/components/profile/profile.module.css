@@ -21,3 +21,7 @@
   color: yellow;
   background-color: rgb(37, 90, 238);
 }
+
+.descriptionBlock {
+  padding: 10px;
+}

@@ -13,7 +13,7 @@ const Dialog = (props) => {
 
 const Message = (props) => {
   return <div className={s.message_item}>
-  <a href="#">{props.message}</a>
+  <a href="/">{props.message}</a>
   </div>
 };
 
