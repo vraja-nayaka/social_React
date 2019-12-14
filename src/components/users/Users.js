@@ -1,31 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './users.module.css';
 import noAvatar from '../../asets/images/noAvatar.jpg';
 import { NavLink } from 'react-router-dom';
 
 const Pagenation = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [1];
-    let startingPage = props.currentPage === 1 ? 2 : props.currentPage
-    for (let i = startingPage; i <= props.currentPage + 4; i++) {
+    let pages = [];
+    const [pagesList, setPagesList] = useState(1);
+    let pagesListSize = 15;
+    let firstPageOfList = (pagesList - 1) * pagesListSize + 1
+    let lastPageOfList = (firstPageOfList + pagesListSize < pagesCount) ? firstPageOfList + pagesListSize : pagesCount;
+    for (let i = firstPageOfList; i <= lastPageOfList; i++) {
         pages.push(i);
     };
-    pages.push(pagesCount);
+
+
     return <div>
-        <button> Предыдущие </button>
-        <PageNumbers {...props} pages={pages}/>
-        <button> Следующие </button>
+        <div className={style.pagesListNavButtons}>
+            <div>
+                {(pagesList > 1)
+                    && <button
+                        onClick={() => { setPagesList(pagesList - 1) }}
+                    > «« </button>}
+            </div>
+            <div>
+                {(lastPageOfList != pagesCount) &&
+                    <button
+                        onClick={() => { setPagesList(pagesList + 1) }}
+                    > »» </button>
+                }
+            </div>
+        </div>
+        <div className={style.pagesListButtons}>
+            <PageNumbers  {...props} pages={pages} />
+        </div>
     </div>
 }
 
 const PageNumbers = (props) => {
     return props.pages.map(p => {
-        return <span
+        return <button
             className={props.currentPage === p && style.selectedPage}
             onClick={(e) => {
                 props.onPageChanged(p);
             }}
-            > {p} </span>
+        > {p} </button>
     });
 }
 

@@ -3,8 +3,8 @@
     grid-gap: 10px;
     grid-template-columns: min-content min-content;
     grid-template-rows: auto auto;
-    
-  }
+
+}
 
 .location {
     background-color: rgb(177, 189, 192);
@@ -28,6 +28,19 @@
     width: 60px;
     border-radius: 30px;
 }
+
+.pagesListNavButtons {
+    display: flex;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.pagesListButtons button {
+background: transparent;
+border-radius: 6px;
+}
+
 .selectedPage {
     font-weight: bold;
+    border: 0px
 }
