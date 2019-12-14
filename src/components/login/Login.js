@@ -7,10 +7,9 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import style from "./../../utils/FormsControls.module.css";
 
-const LoginForm = props => {
-  console.log(props)
+const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div>
         <Field
           name="email"
@@ -38,9 +37,19 @@ const LoginForm = props => {
       <div>
         <button>Login</button>
       </div>
-      {props.error && (
-        <div className={style.formSummaryError}>{props.error}</div>
+      {error && (
+        <div className={style.formSummaryError}>{error}</div>
       )}
+      {captchaUrl && <img src={captchaUrl} />}
+      {captchaUrl && <Field
+        name="captcha"
+        label="You made too many attempts"
+        type="text"
+        component={Input}
+        placeholder={"Enter simbols from image"}
+        validate={[required]}
+      />
+      }
     </form>
   );
 };
@@ -54,29 +63,17 @@ const Login = props => {
   if (props.isAuth) {
     return <Redirect to={"/profile"} />;
   }
-
   return (
     <>
       <h1>login</h1>
-      <LoginReduxForm onSubmit={onSubmit} />
+      <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
     </>
   );
 };
 
 let mapStateToProps = state => ({
-  isAuth: state.auth.isAuth
+  isAuth: state.auth.isAuth,
+  captchaUrl: state.auth.captchaUrl
 });
 
-let mapDispatchToProps = dispatch => {
-  return {
-    login: (email, password, rememberMe, captcha) => {
-      dispatch(login(email, password, rememberMe, captcha));
-    }
-  };
-};
-const LoginWithDispatch = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login);
-
-export default LoginWithDispatch;
+export default connect(mapStateToProps, { login })(Login);;
