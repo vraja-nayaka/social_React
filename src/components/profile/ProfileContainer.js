@@ -14,6 +14,8 @@ class ProfileContainer extends React.Component {
             userId = this.props.authorizedUserId;
             if (!userId) {
                 this.props.history.push("/login");
+            } else { 
+                this.props.history.push("/profile/" + userId); 
             }
         }
         this.props.getUserProfile(userId);
@@ -33,7 +35,7 @@ class ProfileContainer extends React.Component {
     render() {
         return (
             <Profile {...this.props}
-                isOwner={!this.props.match.params.userId}
+                isOwner={this.props.match.params.userId == this.props.authorizedUserId}
                 profile={this.props.profile}
                 status={this.props.status}
                 updateStatus={this.props.updateStatus}

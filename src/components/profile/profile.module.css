@@ -13,13 +13,9 @@
 .icon img {
   height: 25px;
 }
-.icon {
 
-}
-
-.status {
-  color: yellow;
-  background-color: rgb(37, 90, 238);
+.status :hover {
+  background-color: rgb(235, 235, 235);
 }
 
 .descriptionBlock {

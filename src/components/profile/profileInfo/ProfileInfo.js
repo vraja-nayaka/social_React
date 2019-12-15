@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import style from './../profile.module.css';
 import Preloader from './../../common/preloader/Preloader';
-import Vk from './../../../asets/images/icon/vk.svg';
-import Twitter from './../../../asets/images/icon/twitter.svg';
-import Facebook from './../../../asets/images/icon/facebook.svg';
+import vkImg from './../../../asets/images/icon/vk.svg';
+import twitterImg from './../../../asets/images/icon/twitter.svg';
+import facebookImg from './../../../asets/images/icon/facebook.svg';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import userPhoto from './../../../asets/images/noAvatar.jpg';
 import ProfileDataForm from './ProfileDataForm';
@@ -40,7 +40,7 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto, savePr
                         profile={profile} isOwner={isOwner}
                         onMainPhotoSelected={onMainPhotoSelected} />
                 }
-                <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus} isOwner={isOwner} />
             </div>
         </div>
     )
@@ -54,16 +54,19 @@ const ProfileData = ({ profile, isOwner, goToEditMode, onMainPhotoSelected }) =>
             </div>
             {isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}
             {isOwner && <div><button onClick={goToEditMode}>Редактировать</button></div>}
-            <div> {profile.fullName}</div>
-            <div> {`Обо мне: ${(!profile.aboutMe) ? '' : profile.aboutMe}`}</div>
+            <div> <b>{profile.fullName}</b></div>
+            <div> <b>Обо мне: </b>  {profile.aboutMe}</div>
             <div>
-                <div> {(!profile.lookingForAJob) ? 'Не ищу работу' : 'Ищу работу'}</div>
-                <div> {profile.lookingForAJobDescription}</div>
+                <div> {(!profile.lookingForAJob) ? <b>Не ищу работу</b> : <b>Ищу работу</b>}</div>
+                <div> <b>Профессиональные навыки:</b> {profile.lookingForAJobDescription}</div>
             </div>
-            <div className={style.icon}> Контактные данные:
-        <div><a href={profile.contacts.facebook}> <img alt="FacebookIcon" src={Facebook} />{profile.contacts.facebook}</a></div>
-                <div><a href={profile.contacts.vk}> <img alt="VkIcon" src={Vk} />{profile.contacts.vk}</a></div>
-                <div><a href={profile.contacts.twitter}> <img alt="TwitterIcon" src={Twitter} />{profile.contacts.twitter}</a></div>
+            <div className={style.icon}>  <b>Контактные данные:</b>
+                {Object.entries(profile.contacts).map(([key, value]) => {
+                    return ( (value != "") && <div key={key}>
+                    <b> {key}: </b><a>{value}</a>
+                    </div>
+                    )
+                })}
             </div>
         </div >
     )
