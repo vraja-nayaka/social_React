@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 const Friends = props => {
   return (
     <div className={style.friendsBar}>
-      <a className={style.friends} href="#">
+      <a className={style.friends} href="/">
         Друзья
       </a>
       <div>
@@ -33,7 +33,7 @@ const Friend = props => {
           />
         </svg>
       </div>
-      <a>{props.friendName}</a>
+      <a href="/">{props.friendName}</a>
     </div>
   );
 };
@@ -77,10 +77,13 @@ const Navbar = props => {
           Users
         </NavLink>
       </div>
-      <Friends className={style.friends} friends={props.friends} />
-    </div>
+       </div>
   );
 };
+
+// TODO:
+// <Friends className={style.friends} friends={props.friends} />
+
 
 const NavbarConteiner = connect(mapStateToProps)(Navbar);
 export default NavbarConteiner;

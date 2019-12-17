@@ -1,4 +1,4 @@
-import { usersAPI, profileAPI } from './../api/api';
+import { profileAPI } from './../api/api';
 import { stopSubmit } from "redux-form";
 
 const ADD_POST = 'ADD_POST';
@@ -43,7 +43,7 @@ const profileReducer = (state = initialState, action) => {
         status: action.status
       };
     case DELETE_POST:
-      return { ...state, posts: state.posts.filter(p => p.id != action.postId) }
+      return { ...state, posts: state.posts.filter(p => p.id !== action.postId) }
     case SAVE_PHOTO_SUCCESS:
       return { ...state, profile: { ...state.profile, photos: action.photos } }
     default:
@@ -59,7 +59,7 @@ export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos 
 
 
 export const getUserProfile = (userId) => async (dispath) => {
-  const response = await usersAPI.getProfile(userId);
+  const response = await profileAPI.getProfile(userId);
   dispath(setUserProfile(response.data))
 }
 export const getStatus = (userId) => async (dispath) => {
