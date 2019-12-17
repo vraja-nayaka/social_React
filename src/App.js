@@ -6,7 +6,7 @@ import LoginPage from "./components/login/Login";
 import { initializeApp } from "./redux/app-reducer";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import Preloader from "./components/common/preloader/Preloader";
+// import Preloader from "./components/common/preloader/Preloader";
 import { withSuspense } from "./hoc/withSuspense";
 
 import Container from "@material-ui/core/Container";
@@ -35,7 +35,7 @@ class App extends React.Component {
     // }
     return (
       <div >
-        <Container maxWidth="sm">
+        <Container maxWidth="md">
           <HeaderContainer />
           <NavbarConteiner />
           <div className="content">

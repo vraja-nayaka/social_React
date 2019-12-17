@@ -3,7 +3,6 @@
 .navbar {
     grid-area: nav;
     background: rgb(226, 182, 35);
-    height: 500px;
     padding: 10px;
 }
 .item a {
