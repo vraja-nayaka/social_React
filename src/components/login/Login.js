@@ -45,7 +45,7 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
         remember me
       </div>
       <div>
-        <Button variant="contained" color="primary">
+        <Button type="submit" variant="contained" color="primary">
           Login
         </Button>
       </div>

@@ -23,18 +23,18 @@ export const Textarea = ({
   placeholder,
   meta: { touched, error, warning }
 }) => (
-  <div>
-    <label>{label}</label>
-    <div className={`${style.formControl} ${touched && error && style.error}`}>
-      <textarea {...input} placeholder={"placeholder"} type={type} />
-      <div>
-        {touched &&
-          ((error && <span>{error}</span>) ||
-            (warning && <span>{warning}</span>))}
+    <div>
+      <label>{label}</label>
+      <div className={`${style.formControl} ${touched && error && style.error}`}>
+        <textarea {...input} placeholder={"placeholder"} type={type} />
+        <div>
+          {touched &&
+            ((error && <span>{error}</span>) ||
+              (warning && <span>{warning}</span>))}
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
 
 export const Input = ({
   input,
@@ -44,14 +44,14 @@ export const Input = ({
   meta: { touched, invalid, error },
   ...custom
 }) => (
-  <TextField
-    label={label}
-    error={touched && invalid}
-    helperText={touched && error}
-    {...input}
-    {...custom}
-  />
-)
+    <TextField
+      label={label}
+      error={touched && invalid}
+      helperText={touched && error}
+      {...input}
+      {...custom}
+    />
+  )
 
 export const renderCheckbox = ({ input, label }) => (
   <div>
