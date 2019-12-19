@@ -5,15 +5,29 @@ import TextField from '@material-ui/core/TextField'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
+
+
 export const required = value =>
   value || typeof value === 'number'
     ? undefined
     : 'Для отправки необходимо заполнить поле'
 
+    export const requiredMessage = value =>
+  value || typeof value === 'number'
+    ? undefined
+    : undefined
+
+export const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? 'Invalid email address'
+    : undefined
+
+
 const maxLength = max => value =>
   value && value.length > max
     ? `Максимальная длина - ${max} символов`
     : undefined
+
 export const maxLength30 = maxLength(30)
 
 export const Textarea = ({
@@ -40,7 +54,6 @@ export const Input = ({
   input,
   label,
   type,
-  placeholder,
   meta: { touched, invalid, error },
   ...custom
 }) => (
@@ -48,11 +61,12 @@ export const Input = ({
       label={label}
       error={touched && invalid}
       helperText={touched && error}
+      type={type}
       {...input}
       {...custom}
     />
   )
-
+ 
 export const renderCheckbox = ({ input, label }) => (
   <div>
     <FormControlLabel

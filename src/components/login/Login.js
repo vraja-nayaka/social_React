@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Field, reduxForm } from 'redux-form'
-import { Input, renderCheckbox, required } from './../../utils/validators'
+import { Input, renderCheckbox, required, email } from './../../utils/validators'
 import { login } from './../../redux/auth-reducer'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
@@ -27,7 +27,7 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
           label="Email address"
           component={Input}
           placeholder={'Enter your email'}
-          validate={[required]}
+          validate={[required, email]}
         />
       </div>
       <div>

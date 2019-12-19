@@ -42,6 +42,10 @@ export default function Header({ isAuth, login, logout }) {
   const handleClose = () => {
     setAnchorEl(null)
   }
+  const loginingOut = () => {
+    setAnchorEl(null)
+    logout()
+  }
 
   return (
     <div className={classes.root}>
@@ -88,7 +92,7 @@ export default function Header({ isAuth, login, logout }) {
                 <MenuItem onClick={handleClose} href="/profile">
                   <NavLink to={'/profile'}>Profile</NavLink>
                 </MenuItem>
-                <MenuItem onClick={logout}>Logout</MenuItem>
+                <MenuItem onClick={loginingOut}>Logout</MenuItem>
               </Menu>
               <div> {login} </div>
             </div>

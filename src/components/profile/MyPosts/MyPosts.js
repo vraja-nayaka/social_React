@@ -5,15 +5,15 @@ import { required, maxLength30, Textarea } from '../../../utils/validators';
 
 const Post = (props) => {
     return <div className={style.post}>
-        <img src="https://pbs.twimg.com/profile_images/893851949849882627/W3MH-3xd_400x400.jpg"></img>
-        <a href="#">{props.message}</a>
+        <img alt='profile' src="https://pbs.twimg.com/profile_images/893851949849882627/W3MH-3xd_400x400.jpg"></img>
+        <a href="/">{props.message}</a>
         {props.likesCount} likes
   </div>
 };
 
 const MyPosts = (props) => {
 
-    let PostsElements = props.posts.map(post => <Post message={post.message} likesCount={post.likesCount} />);
+    let PostsElements = props.posts.map((post, key) => <Post message={post.message} key={key} likesCount={post.likesCount} />);
     let addPost = (values) => {
         props.addPost(values.newPostText);
     };

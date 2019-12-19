@@ -6,13 +6,10 @@ import LoginPage from "./components/login/Login";
 import { initializeApp } from "./redux/app-reducer";
 import { connect } from "react-redux";
 import { compose } from "redux";
-// import Preloader from "./components/common/preloader/Preloader";
+import Preloader from "./components/common/preloader/Preloader";
 import { withSuspense } from "./hoc/withSuspense";
 
 import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import ProTip from "./ProTip";
 
 const ProfileContainer = React.lazy(() =>
   import("./components/profile/ProfileContainer")
@@ -23,6 +20,9 @@ const DialogsContainer = React.lazy(() =>
 const UsersContainer = React.lazy(() =>
   import("./components/users/UsersContainer")
 );
+const Music = React.lazy(() =>
+  import("./components/music/Music")
+);
 
 class App extends React.Component {
   componentDidMount() {
@@ -30,9 +30,9 @@ class App extends React.Component {
   }
 
   render() {
-    // if (!this.props.initialized) {
-    //   return <Preloader />;
-    // }
+    if (!this.props.initialized) {
+      return <Preloader />;
+    }
     return (
       <div >
         <Container maxWidth="md">
@@ -43,16 +43,11 @@ class App extends React.Component {
               path="/profile/:userId?"
               render={withSuspense(ProfileContainer)}
             />
-            <Route path="/dialogs" render={withSuspense(DialogsContainer)} />
+            <Route path="/dialogs/:dialogId?" render={withSuspense(DialogsContainer)} />
             <Route path="/users" render={withSuspense(UsersContainer)} />
+            <Route path="/music" render={withSuspense(Music)} />
             <Route path="/login" render={() => <LoginPage />} />
           </div>
-          <Box my={4}>
-            <Typography variant="h4" component="h1" gutterBottom>
-              Material UI - подключен
-            </Typography>
-            <ProTip />
-          </Box>
         </Container>
       </div>
     );

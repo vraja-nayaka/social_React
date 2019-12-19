@@ -1,88 +1,71 @@
-import React from "react";
-import style from "./navbar.module.css";
-import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { makeStyles } from '@material-ui/core/styles';
 
-// const Friends = props => {
-//   return (
-//     <div className={style.friendsBar}>
-//       <a className={style.friends} href="/">
-//         Друзья
-//       </a>
-//       <div>
-//         <Friend friendName={props.friends[0].name} />
-//         <Friend friendName={props.friends[1].name} />
-//         <Friend friendName={props.friends[2].name} />
-//       </div>
-//     </div>
-//   );
-// };
-// const Friend = props => {
-//   return (
-//     <div className={style.friendCard}>
-//       <div>
-//         <svg height="60" width="60">
-//           <circle
-//             cx="30"
-//             cy="30"
-//             r="25"
-//             stroke="rgb(11, 90, 90)"
-//             strokeWidth="1"
-//             fill="rgb(165, 201, 204)"
-//           />
-//         </svg>
-//       </div>
-//       <a href="/">{props.friendName}</a>
-//     </div>
-//   );
-// };
+import BottomNavigation from '@material-ui/core/BottomNavigation'
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
+import AccountIcon from '@material-ui/icons/AccountCircleSharp'
+import ChatIcon from '@material-ui/icons/Chat'
+import PeopleIcon from '@material-ui/icons/People'
+import LibraryMusicIcon from '@material-ui/icons/LibraryMusic'
+import Paper from '@material-ui/core/Paper'
 
-let mapStateToProps = state => {
-  return {
-    friends: state.dialogsPage.dialogs
-  };
-};
+const useStyles = makeStyles({
+  root: {
 
-const Navbar = props => {
+  },
+});
+
+export default function Navbar() {
+  const [value, setValue] = React.useState(0)
+const classes = useStyles();
+  const toDialogs = React.forwardRef((props, ref) => (
+    <NavLink innerRef={ref} to={'/dialogs'} {...props} />
+  ))
+  const toProfile = React.forwardRef((props, ref) => (
+    <NavLink innerRef={ref} to={'/profile'} {...props} />
+  ))
+  const toUsers = React.forwardRef((props, ref) => (
+    <NavLink innerRef={ref} to={'/users'} {...props} />
+  ))
+  const toMusic = React.forwardRef((props, ref) => (
+    <NavLink innerRef={ref} to={'/music'} {...props} />
+  ))
+
   return (
-    <div className={style.navbar}>
-      <div className={style.item}>
-        <NavLink to="/profile" activeClassName={style.activeLink}>
-          Profile
-        </NavLink>
-      </div>
-      <div className={style.item}>
-        <NavLink to="/dialogs" activeClassName={style.activeLink}>
-          Dialogs
-        </NavLink>
-      </div>
-      <div className={style.item}>
-        <NavLink to="/news" activeClassName={style.activeLink}>
-          News
-        </NavLink>
-      </div>
-      <div className={style.item}>
-        <NavLink to="/music" activeClassName={style.activeLink}>
-          Music
-        </NavLink>
-      </div>
-      <div className={style.item}>
-        <NavLink to="/settings" activeClassName={style.activeLink}>
-          Settings
-        </NavLink>
-      </div>
-      <div className={style.item}>
-        <NavLink to="/users" activeClassName={style.activeLink}>
-          Users
-        </NavLink>
-      </div>
-       </div>
-  );
-};
-
-// TODO:
-// <Friends className={style.friends} friends={props.friends} />
-
-
-const NavbarConteiner = connect(mapStateToProps)(Navbar);
-export default NavbarConteiner;
+    <Paper>
+      <BottomNavigation
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue)
+        }}
+            showLabels
+        className={classes.root}
+      >
+      {/* TODO: 
+      !ButtonNavigation onChange fron URL
+      */}
+        <BottomNavigationAction
+          label="Profile"
+          component={toProfile}
+          icon={<AccountIcon />}
+        />
+        <BottomNavigationAction
+          label="Dialogs"
+          component={toDialogs}
+          icon={<ChatIcon />}
+        />
+        <BottomNavigationAction
+          label="Users"
+          component={toUsers}
+          icon={<PeopleIcon />}
+        />
+        <BottomNavigationAction
+          label="Music"
+          component={toMusic}
+          icon={<LibraryMusicIcon />}
+        />
+      </BottomNavigation>
+    </Paper>
+  )
+}

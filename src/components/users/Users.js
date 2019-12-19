@@ -1,20 +1,21 @@
-import React, { useState } from "react";
-import style from "./users.module.css";
-import noAvatar from "../../asets/images/noAvatar.jpg";
-import { NavLink } from "react-router-dom";
+import React, { useState } from 'react'
+import style from './users.module.css'
+import noAvatar from '../../asets/images/noAvatar.jpg'
+import { NavLink } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
 
 const Pagenation = props => {
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-  let pages = [];
-  const [pagesList, setPagesList] = useState(1);
-  let pagesListSize = 15;
-  let firstPageOfList = (pagesList - 1) * pagesListSize + 1;
+  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+  let pages = []
+  const [pagesList, setPagesList] = useState(1)
+  let pagesListSize = 15
+  let firstPageOfList = (pagesList - 1) * pagesListSize + 1
   let lastPageOfList =
     firstPageOfList + pagesListSize < pagesCount
       ? firstPageOfList + pagesListSize
-      : pagesCount;
+      : pagesCount
   for (let i = firstPageOfList; i <= lastPageOfList; i++) {
-    pages.push(i);
+    pages.push(i)
   }
 
   return (
@@ -22,24 +23,28 @@ const Pagenation = props => {
       <div className={style.pagesListNavButtons}>
         <div>
           {pagesList > 1 && (
-            <button
+            <Button
+              variant="contained"
+              size="small"
               onClick={() => {
-                setPagesList(pagesList - 1);
+                setPagesList(pagesList - 1)
               }}
             >
               ««
-            </button>
+            </Button>
           )}
         </div>
         <div>
           {lastPageOfList !== pagesCount && (
-            <button
+            <Button
+              variant="contained"
+              size="small"
               onClick={() => {
-                setPagesList(pagesList + 1);
+                setPagesList(pagesList + 1)
               }}
             >
               »»
-            </button>
+            </Button>
           )}
         </div>
       </div>
@@ -47,24 +52,27 @@ const Pagenation = props => {
         <PageNumbers {...props} pages={pages} />
       </div>
     </div>
-  );
-};
+  )
+}
 
 const PageNumbers = props => {
   return props.pages.map(p => {
     return (
-      <button
+      <Button
+        variant="contained"
+        color="primary"
+        size="small"
         key={p}
         className={props.currentPage === p && style.selectedPage}
         onClick={e => {
-          props.onPageChanged(p);
+          props.onPageChanged(p)
         }}
       >
         {p}
-      </button>
-    );
-  });
-};
+      </Button>
+    )
+  })
+}
 
 const Users = props => {
   return (
@@ -73,7 +81,7 @@ const Users = props => {
         <Pagenation {...props} />
         {props.users.map(u => (
           <div className={style.users}>
-            <NavLink to={"/profile/" + u.id}>
+            <NavLink to={'/profile/' + u.id}>
               <img
                 alt="User Avatar"
                 src={u.photos.small != null ? u.photos.small : noAvatar}
@@ -82,23 +90,29 @@ const Users = props => {
             </NavLink>
             <div>
               {u.followed ? (
-                <button
+                <Button
+                  variant="contained"
+                  color="inherit"
+                  size="small"
                   disabled={props.followingInProgress.some(id => id === u.id)}
                   onClick={() => {
-                    props.unfollow(u.id);
+                    props.unfollow(u.id)
                   }}
                 >
                   Unfollow
-                </button>
+                </Button>
               ) : (
-                <button
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  size="small"
                   disabled={props.followingInProgress.some(id => id === u.id)}
                   onClick={() => {
-                    props.follow(u.id);
+                    props.follow(u.id)
                   }}
                 >
                   Follow
-                </button>
+                </Button>
               )}
             </div>
             {/* <div className={style.location}>
@@ -110,7 +124,7 @@ const Users = props => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Users;
+export default Users
