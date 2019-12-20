@@ -47,6 +47,10 @@ export default function Header({ isAuth, login, logout }) {
     logout()
   }
 
+  const toLogin = React.forwardRef((props, ref) => (
+    <NavLink innerRef={ref} to={'/login'} {...props} />
+ ))
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -97,9 +101,10 @@ export default function Header({ isAuth, login, logout }) {
               <div> {login} </div>
             </div>
           )}
+
           {!isAuth && (
-            <Button variant="outlined" color="inherit" href="#outlined-buttons">
-              <NavLink to={'/login'}>login</NavLink>
+            <Button variant="outlined" color="inherit" component={toLogin}>
+              login
             </Button>
           )}
         </Toolbar>

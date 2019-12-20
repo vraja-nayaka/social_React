@@ -6,6 +6,7 @@ import { getStatus, getUserProfile, savePhoto, saveProfile, updateStatus } from 
 import { compose } from 'redux';
 
 
+
 class ProfileContainer extends React.Component {
 
     refreshProfile() {
@@ -27,7 +28,7 @@ class ProfileContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.match.params.userId != prevProps.match.params.userId ) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId ) {
             this.refreshProfile();
         }
     }
@@ -35,7 +36,7 @@ class ProfileContainer extends React.Component {
     render() {
         return (
             <Profile {...this.props}
-                isOwner={this.props.match.params.userId == this.props.authorizedUserId}
+                isOwner={this.props.match.params.userId === this.props.authorizedUserId}
                 profile={this.props.profile}
                 status={this.props.status}
                 updateStatus={this.props.updateStatus}

@@ -62,8 +62,8 @@ const ProfileData = ({ profile, isOwner, goToEditMode, onMainPhotoSelected }) =>
             </div>
             <div className={style.icon}>  <b>Контактные данные:</b>
                 {Object.entries(profile.contacts).map(([key, value]) => {
-                    return ( (value != "") && <div key={key}>
-                    <b> {key}: </b><a>{value}</a>
+                    return ( (value !== "") && <div key={key}>
+                    <b> {key}: </b><a href='/'>{value}</a>
                     </div>
                     )
                 })}

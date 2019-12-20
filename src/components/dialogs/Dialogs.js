@@ -61,74 +61,17 @@ const Dialog = ({ id, name }) => {
 const Dialogs = ({ dialogsPage: { dialogs, messages }, sendMessage }) => {
   const classes = useStyles()
 
- const DialogsElements = dialogs.map(({ id, name }) => (
+  const DialogsElements = dialogs.map(({ id, name }) => (
     <Dialog id={id} name={name} key={id} />
-  ))
-
-  const MessagesElements = messages.map(({ id, message }) => (
-    <React.Fragment key={id}>
-      {id === 1 && (
-        <ListSubheader className={classes.subheader}>Today</ListSubheader>
-      )}
-      {id === 3 && (
-        <ListSubheader className={classes.subheader}>Yesterday</ListSubheader>
-      )}
-      <ListItem button>
-        <ListItemText primary={message} />
-      </ListItem>
-    </React.Fragment>
   ))
 
   return (
     <div>
       <Paper square className={classes.paper}>
-      {DialogsElements}
-</Paper>
-
-      <div>
-        <Typography className={classes.text} variant="h5" gutterBottom>
-          Сообщения
-        </Typography>
-        <Paper square className={classes.paper}>
-          <List className={classes.list}>
-          {MessagesElements}
-          </List>
-        </Paper>
-        <AddMessageReduxForm
-          onSubmit={({ newMessage }) => sendMessage(newMessage)}
-        />
-      </div>
+        {DialogsElements}
+      </Paper>
     </div>
   )
 }
-
-const AddMessageForm = ({ handleSubmit }) => {
-  const classes = useStyles()
-  return (
-    <AppBar position="fixed" color="secondary" className={classes.appBar}>
-      <Toolbar>
-        <IconButton color="inherit">
-          <SearchIcon />
-        </IconButton>
-        <form onSubmit={handleSubmit}>
-          <Field
-            placeholder="Введите Ваше сообщение"
-            component={Input}
-            validate={[requiredMessage, maxLength30]}
-            name="newMessage"
-            type="text"
-          />
-          <Button onSubmit={handleSubmit} type="submit" color="inherit">
-            <SendSharpIcon />
-          </Button>
-        </form>
-      </Toolbar>
-    </AppBar>
-  )
-}
-
-const AddMessageReduxForm = reduxForm({
-  form: 'newMessage'
-})(AddMessageForm)
 
 export default Dialogs

@@ -13,8 +13,6 @@ import {
     getFollowingInProgress
 } from '../../redux/users-selectors'
 
-
-
 import { connect } from "react-redux";
 import Users from './Users';
 import Preloader from './../common/preloader/Preloader';

@@ -63,7 +63,6 @@ const PageNumbers = props => {
         color="primary"
         size="small"
         key={p}
-        className={props.currentPage === p && style.selectedPage}
         onClick={e => {
           props.onPageChanged(p)
         }}
