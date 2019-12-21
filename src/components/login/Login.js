@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
-      }
+  }
 }))
 
 const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
@@ -41,8 +41,13 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
         />
       </div>
       <div>
-        <Field name="rememberMe" component={renderCheckbox} type={'сheckbox'} />{' '}
+        <Field name="rememberMe" component={renderCheckbox} type={'сheckbox'} />
         remember me
+      </div>
+      <div>
+        <Typography variant="subtitle2" color="error">
+          {error}
+        </Typography>
       </div>
       <div>
         <Button type="submit" variant="contained" color="primary">
