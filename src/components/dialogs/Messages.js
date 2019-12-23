@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reset, reduxForm } from 'redux-form'
 import { requiredMessage, maxLength30, Input } from './../../utils/validators'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -13,10 +13,8 @@ import IconButton from '@material-ui/core/IconButton'
 import Paper from '@material-ui/core/Paper'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListSubheader from '@material-ui/core/ListSubheader'
-import Avatar from '@material-ui/core/Avatar'
 import SearchIcon from '@material-ui/icons/Search'
 import SendSharpIcon from '@material-ui/icons/SendSharp'
 
@@ -109,8 +107,13 @@ const AddMessageForm = ({ handleSubmit }) => {
   )
 }
 
+
+const afterSubmit = (result, dispatch) =>
+  dispatch(reset('newMessage'));
+
 const AddMessageReduxForm = reduxForm({
-  form: 'newMessage'
+  form: 'newMessage',
+  onSubmitSuccess: afterSubmit
 })(AddMessageForm)
 
 export default Messages

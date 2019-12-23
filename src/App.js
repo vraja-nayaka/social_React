@@ -20,7 +20,6 @@ const DialogsContainer = React.lazy(() =>
 const UsersContainer = React.lazy(() =>
   import('./components/users/UsersContainer')
 )
-const Music = React.lazy(() => import('./components/music/Music'))
 
 class App extends React.Component {
   componentDidMount() {
@@ -28,9 +27,9 @@ class App extends React.Component {
   }
 
   render() {
-    if (!this.props.initialized) {
-      return <Preloader />;
-    }
+//    if (!this.props.initialized) {
+//      return <Preloader />;
+//    }
     return (
       <div>
         <Container maxWidth="md">
@@ -47,7 +46,6 @@ class App extends React.Component {
               render={withSuspense(DialogsContainer)}
             />
             <Route path="/users" render={withSuspense(UsersContainer)} />
-            <Route path="/music" render={withSuspense(Music)} />
             <Route path="/login" render={() => <LoginPage />} />
           </div>
         </Container>

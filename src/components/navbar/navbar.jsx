@@ -7,7 +7,6 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import AccountIcon from '@material-ui/icons/AccountCircleSharp'
 import ChatIcon from '@material-ui/icons/Chat'
 import PeopleIcon from '@material-ui/icons/People'
-import LibraryMusicIcon from '@material-ui/icons/LibraryMusic'
 import Paper from '@material-ui/core/Paper'
 
 const useStyles = makeStyles({
@@ -28,9 +27,7 @@ const classes = useStyles();
   const toUsers = React.forwardRef((props, ref) => (
     <NavLink innerRef={ref} to={'/users'} {...props} />
   ))
-  const toMusic = React.forwardRef((props, ref) => (
-    <NavLink innerRef={ref} to={'/music'} {...props} />
-  ))
+
 
   return (
     <Paper>
@@ -59,11 +56,6 @@ const classes = useStyles();
           label="Users"
           component={toUsers}
           icon={<PeopleIcon />}
-        />
-        <BottomNavigationAction
-          label="Music"
-          component={toMusic}
-          icon={<LibraryMusicIcon />}
         />
       </BottomNavigation>
     </Paper>

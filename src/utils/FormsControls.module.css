@@ -2,7 +2,7 @@
 .error input,
 .error textarea {
     color: red;
-    border: solid red 2px
+    border: solid red 1px
 }
 .error span
 {
@@ -10,6 +10,6 @@
 }
 .formSummaryError {
     color: red;
-    border: solid red 2px;
+    border: solid red 1px;
     padding: 5px
 }

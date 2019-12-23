@@ -1,7 +1,9 @@
 import React from 'react';
 import style from '../profile.module.css';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reset, reduxForm } from 'redux-form';
 import { required, maxLength30, Textarea } from '../../../utils/validators';
+import Button from '@material-ui/core/Button'
+
 
 const Post = (props) => {
     return <div className={style.post}>
@@ -35,13 +37,16 @@ const Form = (props) => {
             type="text"
             placeholder="Введите текст поста">
         </Field>
-        <button type="submit">Опубликовать</button>
+        <Button type="submit" variant="contained" color="primary" >Опубликовать</Button>
     </form>
 }
 
-const MyPostsForm = reduxForm({
-    form: 'myPosts'
-})(Form)
+const afterSubmit = (result, dispatch) =>
+  dispatch(reset('myPosts'));
 
+const MyPostsForm = reduxForm({
+    form: 'myPosts',
+    onSubmitSuccess: afterSubmit
+})(Form)
 
 export default MyPosts;
