@@ -1,42 +1,37 @@
 .container {
-    display: grid;
-    grid-gap: 10px;
+  display: grid;
+  grid-gap: 10px;
 }
 
 .location {
-    background-color: rgb(177, 189, 192);
-    padding: 5px;
-    border-radius: 10px;
+  background-color: rgb(177, 189, 192);
+  padding: 5px;
+  border-radius: 10px;
 }
 
 .users {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 80px auto;
-    grid-template-rows: auto auto;
-    background-color: rgb(181, 231, 240);
-    padding: 10px;
-    border-radius: 10px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 80px auto;
+  grid-template-rows: auto auto;
+  background-color: rgb(181, 231, 240);
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .users img {
-    height: 60px;
-    width: 60px;
-    border-radius: 30px;
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
 }
 
 .pagesListNavButtons {
-    display: flex;
-    justify-content: space-between;
-    user-select: none;
+  display: flex;
+  justify-content: space-between;
+  user-select: none;
 }
 
 .pagesListButtons button {
-background: transparent;
-border-radius: 6px;
-}
-
-.selectedPage {
-    font-weight: bold;
-    border: 0px
+  border-radius: 6px;
+  margin: 2px;
 }
