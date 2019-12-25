@@ -32,7 +32,6 @@ class DialogsContainer extends React.Component {
   //     }
   // }
   render() {
-    console.log(this.props)
     let dialogId = this.props.match.params.dialogId
     return !dialogId ? <Dialogs {...this.props} /> : <Messages messages={this.props.dialogsPage.messages} sendMessage={this.props.sendMessage} />
   }

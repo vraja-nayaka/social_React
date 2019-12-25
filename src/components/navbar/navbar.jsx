@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
+import { withRouter } from 'react-router-dom'
 
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
@@ -12,52 +13,53 @@ import Paper from '@material-ui/core/Paper'
 const useStyles = makeStyles({
   root: {
 
-  },
-});
+  }
+})
 
-export default function Navbar() {
-  const [value, setValue] = React.useState(0)
-const classes = useStyles();
-  const toDialogs = React.forwardRef((props, ref) => (
-    <NavLink innerRef={ref} to={'/dialogs'} {...props} />
-  ))
-  const toProfile = React.forwardRef((props, ref) => (
-    <NavLink innerRef={ref} to={'/profile'} {...props} />
-  ))
-  const toUsers = React.forwardRef((props, ref) => (
-    <NavLink innerRef={ref} to={'/users'} {...props} />
-  ))
+export default withRouter(function Navbar({ location }) {
+  const classes = useStyles()
+  const [value, setValue] = useState(null)
+  let path = location.pathname.split('/')[1]
 
+  const updateNavigation = path => {
+    switch (path) {
+      case 'profile':
+        return setValue(0)
+      case 'dialogs':
+        return setValue(1)
+      case 'users':
+        return setValue(2)
+      default:
+        return setValue(null)
+    }
+  }
+
+  useEffect(() => {
+    updateNavigation(path)
+  }, [path])
 
   return (
     <Paper>
-      <BottomNavigation
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue)
-        }}
-            showLabels
-        className={classes.root}
-      >
-      {/* TODO: 
-      !ButtonNavigation onChange fron URL
-      */}
+      <BottomNavigation value={value} showLabels className={classes.root}>
         <BottomNavigationAction
           label="Profile"
-          component={toProfile}
+          component={NavLink}
+          to={'/profile'}
           icon={<AccountIcon />}
         />
         <BottomNavigationAction
           label="Dialogs"
-          component={toDialogs}
+          component={NavLink}
+          to={'/dialogs'}
           icon={<ChatIcon />}
         />
         <BottomNavigationAction
           label="Users"
-          component={toUsers}
+          component={NavLink}
+          to={'/users'}
           icon={<PeopleIcon />}
         />
       </BottomNavigation>
     </Paper>
   )
-}
+})
