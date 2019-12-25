@@ -113,7 +113,8 @@ const Users = props => {
               />
               <div>{u.name}</div>
             </NavLink>
-            <div>status {u.status}</div>
+            <div>Status:
+            <br/> {u.status}</div>
             {isAuth ? (
               <div>
                 {u.followed ? (
@@ -153,5 +154,8 @@ const Users = props => {
     </div>
   )
 }
+
+
+
 
 export default Users
