@@ -22,7 +22,7 @@ const MyPosts = (props) => {
     return <div>
         <h3>My posts</h3>
         <MyPostsForm onSubmit={addPost}/>
-        <div> {PostsElements} </div>
+        <div> {PostsElements.reverse()} </div>
     </div>
 };
 
