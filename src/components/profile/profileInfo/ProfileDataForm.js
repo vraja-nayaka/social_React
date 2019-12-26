@@ -1,68 +1,84 @@
-import React from "react";
-import style from './../profile.module.css';
-import { reduxForm, Field } from "redux-form";
-import { Input, required } from "../../../utils/validators";
-import s from './../../../utils/FormsControls.module.css';
+import React from 'react'
+import style from './../profile.module.css'
+import { reduxForm, Field } from 'redux-form'
+import { Input, required } from '../../../utils/validators'
+import s from './../../../utils/FormsControls.module.css'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Button from '@material-ui/core/Button'
 
 const ProfileDataForm = ({ handleSubmit, profile, error }) => {
-    return <form onSubmit={handleSubmit}>
-        <div><button>save</button></div>
-        {error && <div className={s.formSummaryError}>
-            {error}
-        </div>
-        }
-        <div>
-            <b>Full name</b>:<Field
-                name="fullName"
-                type="text"
-                component={Input}
-                validate={[required]}
-            />
-        </div>
-        <div>
-            <b>About me</b>:
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <Button type="submit" variant="contained" color="secondary">
+          Сохранить
+        </Button>
+      </div>
+      {error && <div className={s.formSummaryError}>{error}</div>}
+      <div>
+        <Field
+          name="fullName"
+          label="Full name"
+          type="text"
+          component={Input}
+          validate={[required]}
+        />
+      </div>
+      <div>
+        <Field
+          name="aboutMe"
+          label="About me"
+          type="text"
+          component={Input}
+          validate={[]}
+        />
+      </div>
+      <div>
+        <FormControlLabel
+          control={
             <Field
-                name="aboutMe"
-                type="text"
-                component={Input}
-                validate={[]}
+              name="lookingForAJob"
+              type="checkbox"
+              component={Input}
+              validate={[]}
             />
-        </div>
-        <div>
-            <b>Looking for a job</b>:
-            <Field
-                name="lookingForAJob"
-                type="checkbox"
-                component={Input}
-                validate={[]}
-            />
-        </div>
+          }
+          label="Looking for a job"
+          labelPlacement="end"
+        />
+      </div>
 
-        <div>
-            <b>My professional skills</b>:
-            <Field
-                name="lookingForAJobDescription"
+      <div>
+        <Field
+          name="lookingForAJobDescription"
+          label="My professional skills"
+          type="text"
+          component={Input}
+          validate={[]}
+        />
+      </div>
+      <div>
+        <b>Contacts</b>:{' '}
+        {Object.keys(profile.contacts).map(key => {
+          return (
+            <div key={key}>
+              <Field
+                name={'contacts.' + key}
+                label={key}
                 type="text"
                 component={Input}
                 validate={[]}
-            />
-        </div>
-        <div>
-            <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
-                return <div key={key}>
-                    {key}:<Field
-                        name={"contacts." + key}
-                        type="text"
-                        component={Input}
-                        validate={[]}
-                    />
-                </div>
-            })}
-        </div>
+              />
+            </div>
+          )
+        })}
+      </div>
     </form>
+  )
 }
 
+const ProfileDataFormReduxForm = reduxForm({ form: 'edit-profile' })(
+  ProfileDataForm
+)
 
-const ProfileDataFormReduxForm = reduxForm({ form: 'edit-profile' })(ProfileDataForm)
-
-export default ProfileDataFormReduxForm;
+export default ProfileDataFormReduxForm

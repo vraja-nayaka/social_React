@@ -7,6 +7,9 @@ import Preloader from './../../common/preloader/Preloader'
 import ProfileStatusWithHooks from './ProfileStatusWithHooks'
 import userPhoto from './../../../asets/images/noAvatar.jpg'
 import ProfileDataForm from './ProfileDataForm'
+import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+import PhotoCamera from '@material-ui/icons/PhotoCamera'
 
 const ProfileInfo = ({
   savePhoto,
@@ -72,35 +75,57 @@ const ProfileData = ({
   return (
     <div className={style.profile_info}>
       <div>
-        {' '}
         <img alt="[no-аватар]" src={profile.photos.large || userPhoto} />
+            {isOwner && (
+        <>
+          <input
+            style={{
+              display: 'none'
+            }}
+            accept="image/*"
+            id="contained-button-file"
+            type="file"
+            onChange={onMainPhotoSelected}
+          />
+          <label htmlFor="contained-button-file">
+            <IconButton
+              color="secondary"
+              aria-label="upload picture"
+              component="span"
+            >
+              <PhotoCamera />
+            </IconButton>
+          </label>
+        </>
+      )}
       </div>
-      {isOwner && <input type={'file'} onChange={onMainPhotoSelected} />}
       {isOwner && (
         <div>
-          <button onClick={goToEditMode}>Редактировать</button>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="small"
+            onClick={goToEditMode}
+          >
+            Редактировать
+          </Button>
         </div>
       )}
       <div>
-        {' '}
         <b>{profile.fullName}</b>
       </div>
       <div>
-        {' '}
         <b>Обо мне: </b> {profile.aboutMe}
       </div>
       <div>
         <div>
-          {' '}
           {!profile.lookingForAJob ? <b>Не ищу работу</b> : <b>Ищу работу</b>}
         </div>
         <div>
-          {' '}
           <b>Профессиональные навыки:</b> {profile.lookingForAJobDescription}
         </div>
       </div>
       <div className={style.icon}>
-        {' '}
         <b>Контактные данные:</b>
         {Object.entries(profile.contacts).map(([key, value]) => {
           return (

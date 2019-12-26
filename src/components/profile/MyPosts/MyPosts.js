@@ -1,21 +1,14 @@
 import React from 'react';
-import style from '../profile.module.css';
 import { Field, reset, reduxForm } from 'redux-form';
 import { required, maxLength30, Textarea } from '../../../utils/validators';
 import Button from '@material-ui/core/Button'
+import PostCard from './PostCard'
 
-
-const Post = (props) => {
-    return <div className={style.post}>
-        <img alt='profile' src="https://pbs.twimg.com/profile_images/893851949849882627/W3MH-3xd_400x400.jpg"></img>
-        <a href="/">{props.message}</a>
-        {props.likesCount} likes
-  </div>
-};
 
 const MyPosts = (props) => {
 
-    let PostsElements = props.posts.map((post, key) => <Post message={post.message} key={key} likesCount={post.likesCount} />);
+    let PostsElements = props.posts.map((post, key) => 
+    <PostCard message={post.message} author={post.author} key={key} likesCount={post.likesCount} />);
     let addPost = (values) => {
         props.addPost(values.newPostText);
     };
@@ -25,7 +18,6 @@ const MyPosts = (props) => {
         <div> {PostsElements.reverse()} </div>
     </div>
 };
-
 
 const Form = (props) => {
     return <form onSubmit={props.handleSubmit}>
