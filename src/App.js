@@ -27,12 +27,12 @@ class App extends React.Component {
   }
 
   render() {
-//    if (!this.props.initialized) {
-//      return <Preloader />;
-//    }
+    //    if (!this.props.initialized) {
+    //      return <Preloader />;
+    //    }
     return (
-      <div>
-        <Container maxWidth="md">
+      <Container fixed maxWidth="md">
+        <div style={{ paddingBottom: 55 }}>
           <HeaderContainer />
           <NavbarConteiner />
           {this.props.initialized ? <div> ready </div> : <div>not ready</div>}
@@ -48,8 +48,8 @@ class App extends React.Component {
             <Route path="/users" render={withSuspense(UsersContainer)} />
             <Route path="/login" render={() => <LoginPage />} />
           </div>
-        </Container>
-      </div>
+        </div>
+      </Container>
     )
   }
 }

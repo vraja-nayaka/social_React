@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Field, reset, reduxForm } from 'redux-form'
 import { requiredMessage, maxLength30, Input } from './../../utils/validators'
-
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 
@@ -15,7 +15,6 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListSubheader from '@material-ui/core/ListSubheader'
-import SearchIcon from '@material-ui/icons/Search'
 import SendSharpIcon from '@material-ui/icons/SendSharp'
 
 const useStyles = makeStyles(theme => ({
@@ -23,7 +22,10 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2, 2, 0)
   },
   paper: {
-    paddingBottom: 60
+    paddingBottom: 0
+  },
+  paperPhone: {
+    paddingBottom: 25
   },
   list: {
     marginBottom: theme.spacing(2)
@@ -33,18 +35,18 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     top: 'auto',
-    bottom: 0,
+    bottom: '0px',
     maxWidth: 876,
-    left: 'auto',
-    right: 'auto'
-    },
-  grow: {
-    flexGrow: 1
+    left: '0px',
+    width: '100vw',
+    zIndex: '1'
+  },
+  appBarPhone: {
+    bottom: '55px'
   }
 }))
 
 const Messages = ({ messages, sendMessage }) => {
-  
   const classes = useStyles()
 
   const MessagesElements = messages.map(({ id, message }) => (
@@ -64,32 +66,42 @@ const Messages = ({ messages, sendMessage }) => {
   const pathLink = React.forwardRef((props, ref) => (
     <NavLink innerRef={ref} to={'/dialogs'} {...props} />
   ))
+
+  const matches = useMediaQuery('(min-width:600px)')
   return (
     <div>
-         <Button type="submit" variant="contained" size="small" color="primary" component={pathLink}>
-          «« back
-        </Button>
+      <Button
+        type="submit"
+        variant="contained"
+        size="small"
+        color="primary"
+        component={pathLink}
+      >
+        «« back
+      </Button>
       <Typography className={classes.text} variant="h5" gutterBottom>
         Сообщения
       </Typography>
-      <Paper square className={classes.paper}>
+      <Paper square className={matches ? classes.paper : classes.paperPhone}>
         <List className={classes.list}>{MessagesElements}</List>
       </Paper>
       <AddMessageReduxForm
         onSubmit={({ newMessage }) => sendMessage(newMessage)}
+        matches={matches}
       />
     </div>
   )
 }
 
-const AddMessageForm = ({ handleSubmit }) => {
+const AddMessageForm = ({ handleSubmit, matches }) => {
   const classes = useStyles()
   return (
-    <AppBar position="fixed" color="secondary" className={classes.appBar}>
+    <AppBar
+      position="fixed"
+      color="secondary"
+      className={`${classes.appBar} ${!matches && classes.appBarPhone}`}
+    >
       <Toolbar>
-        <IconButton color="inherit">
-          <SearchIcon />
-        </IconButton>
         <form onSubmit={handleSubmit}>
           <Field
             placeholder="Введите Ваше сообщение"
@@ -107,9 +119,7 @@ const AddMessageForm = ({ handleSubmit }) => {
   )
 }
 
-
-const afterSubmit = (result, dispatch) =>
-  dispatch(reset('newMessage'));
+const afterSubmit = (result, dispatch) => dispatch(reset('newMessage'))
 
 const AddMessageReduxForm = reduxForm({
   form: 'newMessage',
