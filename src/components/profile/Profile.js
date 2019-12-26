@@ -1,6 +1,7 @@
 import React from 'react'
 import MyPostsContainer from './MyPosts/MyPostsContainer'
 import ProfileInfo from './profileInfo/ProfileInfo'
+import Divider from '@material-ui/core/Divider'
 
 const Profile = ({
   savePhoto,
@@ -20,6 +21,7 @@ const Profile = ({
         saveProfile={saveProfile}
         updateStatus={updateStatus}
       />
+      <Divider variant="middle" />
       <MyPostsContainer />
     </div>
   )

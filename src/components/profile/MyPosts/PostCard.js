@@ -14,10 +14,10 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 
 const useStyles = makeStyles(theme => ({
   card: {
-    marginTop: '10px',
+    marginTop: '10px'
   },
   avatar: {
-    backgroundColor: deepPurple[500],
+    backgroundColor: deepPurple[500]
   }
 }))
 
@@ -56,4 +56,3 @@ export default function PostCard(props) {
     </Card>
   )
 }
-

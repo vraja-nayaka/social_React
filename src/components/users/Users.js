@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import style from './users.module.css'
-import noAvatar from '../../asets/images/noAvatar.jpg'
-import { NavLink } from 'react-router-dom'
+import UserCard from './UserCard'
+
 import Button from '@material-ui/core/Button'
 
 const Pagenation = ({
@@ -105,50 +105,11 @@ const Users = props => {
           currentPage={currentPage}
         />
         {users.map(u => (
-          <div className={style.users}>
-            <NavLink to={'/profile/' + u.id}>
-              <img
-                alt="User Avatar"
-                src={u.photos.small != null ? u.photos.small : noAvatar}
-              />
-              <div>{u.name}</div>
-            </NavLink>
-            <div>Status:
-            <br/> {u.status}</div>
-            {isAuth ? (
-              <div>
-                {u.followed ? (
-                  <Button
-                    variant="contained"
-                    color="inherit"
-                    size="small"
-                    disabled={followingInProgress.some(id => id === u.id)}
-                    onClick={() => {
-                      unfollow(u.id)
-                    }}
-                  >
-                    Unfollow
-                  </Button>
-                ) : (
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    size="small"
-                    disabled={followingInProgress.some(id => id === u.id)}
-                    onClick={() => {
-                      follow(u.id)
-                    }}
-                  >
-                    Follow
-                  </Button>
-                )}
-              </div>
-            ) : null}
-            {/* <div className={style.location}>
-                <div>{u.location.country}</div>
-                <div>{u.location.city}</div>
-            </div> */}
-          </div>
+<UserCard u={u} unfollow={unfollow}
+    follow={follow}
+    followingInProgress={followingInProgress}
+    isAuth={isAuth}
+    />
         ))}
       </div>
     </div>

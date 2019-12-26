@@ -11,18 +11,23 @@
 
 .users {
   display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 80px auto;
+  grid-gap: 0px;
+  grid-template-columns: 90px auto;
   grid-template-rows: auto auto;
-  background-color: rgb(181, 231, 240);
+  background-color: rgb(219, 236, 234);
   padding: 10px;
   border-radius: 10px;
 }
 
+.userAvatar {
+  grid-column: 1;
+  grid-row: 1 / 4;
+}
 .users img {
-  height: 60px;
-  width: 60px;
-  border-radius: 30px;
+  height: 80px;
+  width: 80px;
+  border-radius: 40px;
+  border: 6px solid white;
 }
 
 .pagesListNavButtons {
