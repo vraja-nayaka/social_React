@@ -96,17 +96,23 @@ export default function Header({ isAuth, login, logout }) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose} href="/profile">
-                  <NavLink to={'/profile'}>Profile</NavLink>
+                <MenuItem
+                  component={NavLink}
+                  to="/profile"
+                  onClick={handleClose}
+                >
+                  Profile
                 </MenuItem>
-                <MenuItem onClick={loginingOut}>Logout</MenuItem>
+                <MenuItem component={NavLink} to="/" onClick={loginingOut}>
+                  Logout
+                </MenuItem>
               </Menu>
               <div> {login} </div>
             </div>
           )}
 
           {!isAuth && (
-            <Button variant="outlined" color="inherit" component={toLogin}>
+            <Button variant="outlined" color="inherit" component={NavLink} to="/login">
               login
             </Button>
           )}

@@ -40,7 +40,7 @@ export const Textarea = ({
     <div>
       <label>{label}</label>
       <div className={`${style.formControl} ${touched && error && style.error}`}>
-        <textarea {...input} placeholder={"placeholder"} type={type} />
+        <textarea {...input} placeholder={placeholder} type={type} />
         <div>
           {touched &&
             ((error && <span>{error}</span>) ||
@@ -62,6 +62,7 @@ export const Input = ({
       error={touched && invalid}
       helperText={touched && error}
       type={type}
+      
       {...input}
       {...custom}
     />

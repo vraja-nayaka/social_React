@@ -20,10 +20,13 @@ const DialogsContainer = React.lazy(() =>
 const UsersContainer = React.lazy(() =>
   import('./components/users/UsersContainer')
 )
+<<<<<<< HEAD
 const WellcomePage = React.lazy(() =>
   import('./components/wellcome/WellcomePage')
 )
 const Music = React.lazy(() => import('./components/music/Music'))
+=======
+>>>>>>> 2a0bb7d6295f38a179e9568bdd160b214703d96b
 
 class App extends React.Component {
   componentDidMount() {
@@ -31,12 +34,12 @@ class App extends React.Component {
   }
 
   render() {
-    if (!this.props.initialized) {
-      return <Preloader />;
-    }
+    //    if (!this.props.initialized) {
+    //      return <Preloader />;
+    //    }
     return (
-      <div>
-        <Container maxWidth="md">
+      <Container fixed maxWidth="md">
+        <div style={{ paddingBottom: 55 }}>
           <HeaderContainer />
           <NavbarConteiner />
           <div className="content">
@@ -54,11 +57,10 @@ class App extends React.Component {
               render={withSuspense(DialogsContainer)}
             />
             <Route path="/users" render={withSuspense(UsersContainer)} />
-            <Route path="/music" render={withSuspense(Music)} />
             <Route path="/login" render={() => <LoginPage />} />
           </div>
-        </Container>
-      </div>
+        </div>
+      </Container>
     )
   }
 }

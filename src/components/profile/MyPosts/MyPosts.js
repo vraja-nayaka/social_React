@@ -1,29 +1,23 @@
 import React from 'react';
-import style from '../profile.module.css';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reset, reduxForm } from 'redux-form';
 import { required, maxLength30, Textarea } from '../../../utils/validators';
+import Button from '@material-ui/core/Button'
+import PostCard from './PostCard'
 
-const Post = (props) => {
-    return <div className={style.post}>
-        <img alt='profile' src="https://pbs.twimg.com/profile_images/893851949849882627/W3MH-3xd_400x400.jpg"></img>
-        <a href="/">{props.message}</a>
-        {props.likesCount} likes
-  </div>
-};
 
 const MyPosts = (props) => {
 
-    let PostsElements = props.posts.map((post, key) => <Post message={post.message} key={key} likesCount={post.likesCount} />);
+    let PostsElements = props.posts.map((post, key) => 
+    <PostCard message={post.message} author={post.author} key={key} likesCount={post.likesCount} />);
     let addPost = (values) => {
         props.addPost(values.newPostText);
     };
     return <div>
         <h3>My posts</h3>
         <MyPostsForm onSubmit={addPost}/>
-        <div> {PostsElements} </div>
+        <div> {PostsElements.reverse()} </div>
     </div>
 };
-
 
 const Form = (props) => {
     return <form onSubmit={props.handleSubmit}>
@@ -35,13 +29,16 @@ const Form = (props) => {
             type="text"
             placeholder="Введите текст поста">
         </Field>
-        <button type="submit">Опубликовать</button>
+        <Button type="submit" variant="contained" color="primary" >Опубликовать</Button>
     </form>
 }
 
-const MyPostsForm = reduxForm({
-    form: 'myPosts'
-})(Form)
+const afterSubmit = (result, dispatch) =>
+  dispatch(reset('myPosts'));
 
+const MyPostsForm = reduxForm({
+    form: 'myPosts',
+    onSubmitSuccess: afterSubmit
+})(Form)
 
 export default MyPosts;

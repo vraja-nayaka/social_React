@@ -1,71 +1,76 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
+import { withRouter } from 'react-router-dom'
 
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import AccountIcon from '@material-ui/icons/AccountCircleSharp'
 import ChatIcon from '@material-ui/icons/Chat'
 import PeopleIcon from '@material-ui/icons/People'
-import LibraryMusicIcon from '@material-ui/icons/LibraryMusic'
 import Paper from '@material-ui/core/Paper'
 
 const useStyles = makeStyles({
   root: {
-
+    position: 'fixed',
+    bottom: '0px',
+    left: '0px',
+    width: '100vw',
+    zIndex: '1'
   },
-});
+  paper: {
+    width: '100vw'
+  }
+})
 
-export default function Navbar() {
-  const [value, setValue] = React.useState(0)
-const classes = useStyles();
-  const toDialogs = React.forwardRef((props, ref) => (
-    <NavLink innerRef={ref} to={'/dialogs'} {...props} />
-  ))
-  const toProfile = React.forwardRef((props, ref) => (
-    <NavLink innerRef={ref} to={'/profile'} {...props} />
-  ))
-  const toUsers = React.forwardRef((props, ref) => (
-    <NavLink innerRef={ref} to={'/users'} {...props} />
-  ))
-  const toMusic = React.forwardRef((props, ref) => (
-    <NavLink innerRef={ref} to={'/music'} {...props} />
-  ))
+export default withRouter(function Navbar({ location }) {
+  const classes = useStyles()
+  const matches = useMediaQuery('(min-width:600px)')
+  const [value, setValue] = useState(null)
+  let path = location.pathname.split('/')[1]
+
+  const updateNavigation = path => {
+    switch (path) {
+      case 'profile':
+        return setValue(0)
+      case 'dialogs':
+        return setValue(1)
+      case 'users':
+        return setValue(2)
+      default:
+        return setValue(null)
+    }
+  }
+
+  useEffect(() => {
+    updateNavigation(path)
+  }, [path])
 
   return (
-    <Paper>
-      <BottomNavigation
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue)
-        }}
-            showLabels
-        className={classes.root}
-      >
-      {/* TODO: 
-      !ButtonNavigation onChange fron URL
-      */}
-        <BottomNavigationAction
-          label="Profile"
-          component={toProfile}
-          icon={<AccountIcon />}
-        />
-        <BottomNavigationAction
-          label="Dialogs"
-          component={toDialogs}
-          icon={<ChatIcon />}
-        />
-        <BottomNavigationAction
-          label="Users"
-          component={toUsers}
-          icon={<PeopleIcon />}
-        />
-        <BottomNavigationAction
-          label="Music"
-          component={toMusic}
-          icon={<LibraryMusicIcon />}
-        />
-      </BottomNavigation>
-    </Paper>
+    <div className={!matches && classes.root}>
+      <Paper className={!matches && classes.paper}>
+        <BottomNavigation value={value} showLabels>
+          <BottomNavigationAction
+            label="Profile"
+            component={NavLink}
+            to={'/profile'}
+            icon={<AccountIcon />}
+          />
+          <BottomNavigationAction
+            label="Dialogs"
+            component={NavLink}
+            to={'/dialogs'}
+            icon={<ChatIcon />}
+          />
+          <BottomNavigationAction
+            label="Users"
+            component={NavLink}
+            to={'/users'}
+            icon={<PeopleIcon />}
+          />
+        </BottomNavigation>
+      </Paper>
+    </div>
   )
-}
+})

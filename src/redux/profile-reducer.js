@@ -9,11 +9,11 @@ const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 
 let initialState = {
   posts: [
-    { id: 1, message: 'Всем здорова!', likesCount: 15 },
-    { id: 2, message: 'All right!', likesCount: 2 },
-    { id: 3, message: 'Happyness', likesCount: 74 },
-    { id: 4, message: 'Lets go!', likesCount: 4 },
-    { id: 5, message: 'Wow!', likesCount: 1 }
+    { id: 1, author: 'Joe Gamble', message: 'Всем здорова!', likesCount: 15 },
+    { id: 2, author: 'Tiny Bro', message: 'All right!', likesCount: 2 },
+    { id: 3, author: 'Salsa Mc Try', message: 'Happyness', likesCount: 74 },
+    { id: 4, author: 'Sindy Taylor', message: 'Lets go!', likesCount: 4 },
+    { id: 5, author: 'Joe Gamble', message: 'Wow!', likesCount: 1 }
   ],
   profile: null,
   status: ''
@@ -24,6 +24,7 @@ const profileReducer = (state = initialState, action) => {
     case ADD_POST:
       let newPost = {
         id: 6,
+        author: "It is your new post",
         message: action.newPostText,
         likesCount: 0
       };
@@ -51,7 +52,7 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const addPost = (newPostText) => ({ type: ADD_POST, newPostText });
+export const addPost = (newPostText) => ({ type: ADD_POST, newPostText});
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 export const deletePost = (postId) => ({ type: DELETE_POST, postId })
