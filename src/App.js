@@ -20,6 +20,9 @@ const DialogsContainer = React.lazy(() =>
 const UsersContainer = React.lazy(() =>
   import('./components/users/UsersContainer')
 )
+const WellcomePage = React.lazy(() =>
+  import('./components/wellcome/WellcomePage')
+)
 const Music = React.lazy(() => import('./components/music/Music'))
 
 class App extends React.Component {
@@ -36,8 +39,12 @@ class App extends React.Component {
         <Container maxWidth="md">
           <HeaderContainer />
           <NavbarConteiner />
-          {this.props.initialized ? <div> ready </div> : <div>not ready</div>}
           <div className="content">
+          <Route
+              path="/"
+              exact
+              render={withSuspense(WellcomePage)}
+            />
             <Route
               path="/profile/:userId?"
               render={withSuspense(ProfileContainer)}
