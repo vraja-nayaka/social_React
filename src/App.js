@@ -21,7 +21,10 @@ const UsersContainer = React.lazy(() =>
   import('./components/users/UsersContainer')
 )
 
-
+const WellcomePage = React.lazy(() =>
+  import('./components/wellcome/WellcomePage')
+)
+const Music = React.lazy(() => import('./components/music/Music'))
 
 class App extends React.Component {
   componentDidMount() {
@@ -39,6 +42,11 @@ class App extends React.Component {
           <NavbarConteiner />
           {this.props.initialized ? null : <div>initializing...</div>}
           <div className="content">
+          <Route
+              path="/"
+              exact
+              render={withSuspense(WellcomePage)}
+            />
             <Route
               path="/profile/:userId?"
               render={withSuspense(ProfileContainer)}

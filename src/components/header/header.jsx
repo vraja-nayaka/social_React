@@ -26,7 +26,11 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
+    '& a': {
+      textDecoration: 'none',
+      color: 'white'
+    }
   }
 }))
 
@@ -47,6 +51,10 @@ export default function Header({ isAuth, login, logout }) {
     logout()
   }
 
+  const toLogin = React.forwardRef((props, ref) => (
+    <NavLink innerRef={ref} to={'/login'} {...props} />
+  ))
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -59,10 +67,9 @@ export default function Header({ isAuth, login, logout }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h5" noWrap>
-            SamuraiJS
+          <Typography className={classes.title} variant="h5" noWrap >
+            <NavLink to={'/'}>SamuraiJS</NavLink>
           </Typography>
-
           {isAuth && (
             <div>
               <IconButton
