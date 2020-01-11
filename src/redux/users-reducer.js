@@ -9,7 +9,7 @@ const TOGGLE_IS_FETHING = 'TOGGLE_IS_FETHING';
 const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS';
 
 
-let initialState = {
+export const initialState = {
   users: [],
   pageSize: 10,
   totalUsersCount: 50,
