@@ -31,14 +31,15 @@ class App extends React.Component {
   }
 
   render() {
-    //    if (!this.props.initialized) {
-    //      return <Preloader />;
-    //    }
+       if (!this.props.initialized) {
+         return <Preloader />;
+       }
     return (
       <Container fixed maxWidth="md">
         <div style={{ paddingBottom: 55 }}>
           <HeaderContainer />
           <NavbarConteiner />
+          {this.props.initialized ? null : <div>initializing...</div>}
           <div className="content">
           <Route
               path="/"
