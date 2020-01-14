@@ -1,6 +1,6 @@
 ## Welcome to SamuraiJS!:dizzy:
 
-Here you can find ReactJS developers looking for employment.
+Here you can find ReactJS developers looking for employment.<br>
 This app developing with using React, Redux, REST API, ES6 and Material Design ect. 
 
 ## Getting Started
@@ -18,29 +18,29 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Example
 
-[Try it here!](https://react-samurai-js.herokuapp.com)
+[Try it here!](https://react-samurai-js.herokuapp.com)<br>
 Use the following to log in:
-  Email: free@samuraijs.com
-  Password: free 
+    Email: free@samuraijs.com
+    Password: free 
 
 ## Features
-*browser-routing
-*redux-thunk
-*redux-form validation
-*login
-*captcha
-*REST API
-*pagination
-*preloader
-*ajax
-*auth
-*axios
-*cookie
-*HOCs
-*hooks and classes
-*material disign
-*css-modules
-*some tests
+- browser-routing
+- redux-thunk
+- redux-form validation
+- login
+- captcha
+- REST API
+- pagination
+- preloader
+- ajax
+- auth
+- axios
+- cookie
+- HOCs
+- hooks and classes
+- material disign
+- css-modules
+- some tests
 
 
  
