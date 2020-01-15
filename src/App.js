@@ -23,7 +23,10 @@ const UsersContainer = React.lazy(() =>
 const WellcomePage = React.lazy(() =>
   import('./components/wellcome/WellcomePage')
 )
-const Music = React.lazy(() => import('./components/music/Music'))
+const TodoPage = React.lazy(() =>
+  import('./components/todo/components/App')
+)
+// const Music = React.lazy(() => import('./components/music/Music'))
 
 class App extends React.Component {
   componentDidMount() {
@@ -51,6 +54,10 @@ class App extends React.Component {
               render={withSuspense(ProfileContainer)}
             />
             <Route
+              path="/todo"
+              render={withSuspense(TodoPage)}
+            />
+            <Route
               path="/dialogs/:dialogId?"
               render={withSuspense(DialogsContainer)}
             />
@@ -74,3 +81,5 @@ export default compose(
     { initializeApp }
   )
 )(App)
+
+

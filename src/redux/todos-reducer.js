@@ -9,6 +9,15 @@ export const SHOW_ALL = 'show_all'
 export const SHOW_COMPLETED = 'show_completed'
 export const SHOW_ACTIVE = 'show_active'
 
+export const addTodo = text => ({ type: ADD_TODO, text })
+export const deleteTodo = id => ({ type: DELETE_TODO, id })
+export const editTodo = (id, text) => ({ type: EDIT_TODO, id, text })
+export const completeTodo = id => ({ type: COMPLETE_TODO, id })
+export const completeAllTodos = () => ({ type: COMPLETE_ALL_TODOS })
+export const clearCompleted = () => ({ type: CLEAR_COMPLETED })
+export const setVisibilityFilter = filter => ({ type: SET_VISIBILITY_FILTER, filter})
+
+
 
 const initialState = [
   {
@@ -18,7 +27,7 @@ const initialState = [
   }
 ]
 
-export default function todos(state = initialState, action) {
+export default function todoReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_TODO:
       return [

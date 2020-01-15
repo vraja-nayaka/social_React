@@ -42,7 +42,6 @@ const usersReducer = (state = initialState, action) => {
         )
       };
     case SET_USERS: {
-      let a = action.users
       return { ...state, users: action.users }
     }
     case SET_CURRENT_PAGE: {
