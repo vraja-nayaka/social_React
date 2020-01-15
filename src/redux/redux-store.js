@@ -17,7 +17,7 @@ const reducers = combineReducers({
   auth: authReducer,
   form: formReducer,
   app: appReducer,
-  todo: todoReducer
+  todos: todoReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

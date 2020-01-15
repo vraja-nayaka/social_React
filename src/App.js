@@ -24,7 +24,7 @@ const WellcomePage = React.lazy(() =>
   import('./components/wellcome/WellcomePage')
 )
 const TodoPage = React.lazy(() =>
-  import('./components/todo/components/App')
+  import('./components/todo2/components/App')
 )
 // const Music = React.lazy(() => import('./components/music/Music'))
 
