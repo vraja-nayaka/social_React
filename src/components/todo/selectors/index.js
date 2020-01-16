@@ -1,12 +1,13 @@
 import { createSelector } from 'reselect'
 import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters'
 
-const getVisibilityFilter = state => state.visibilityFilter
-const getTodos = state => state.todos
+const getVisibilityFilter = state => state.todos.visibilityFilter
+const getTodos = state => state.todos.todos
 
 export const getVisibleTodos = createSelector(
-  [getVisibilityFilter, getTodos],
+    [getVisibilityFilter, getTodos],
   (visibilityFilter, todos) => {
+    debugger
     switch (visibilityFilter) {
       case SHOW_ALL:
         return todos
@@ -15,12 +16,12 @@ export const getVisibleTodos = createSelector(
       case SHOW_ACTIVE:
         return todos.filter(t => !t.completed)
       default:
-        return null 
-        throw new Error('Unknown filter: ' + visibilityFilter)
+        return todos
+
     }
   }
 )
-
+//         throw new Error('Unknown filter: ' + visibilityFilter)
 export const getCompletedTodoCount = createSelector(
   [getTodos],
   todos => (
