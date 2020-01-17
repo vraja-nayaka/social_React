@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import TodoTextInput from './TodoTextInput'
+import style from './todo.module.css'
 
 const Header = ({ addTodo }) => (
-  <header className="header">
-    <h1>todos</h1>
+  <header >
+    <h1 className={style.title}>todos</h1>
     <TodoTextInput
       newTodo
       onSave={(text) => {

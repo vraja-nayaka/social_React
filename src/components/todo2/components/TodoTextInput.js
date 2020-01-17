@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import style from './todo.module.css'
 
 export default class TodoTextInput extends Component {
   static propTypes = {
@@ -37,18 +38,21 @@ export default class TodoTextInput extends Component {
 
   render() {
     return (
-      <input className={
-        classnames({
-          edit: this.props.editing,
-          'new-todo': this.props.newTodo
-        })}
-        type="text"
-        placeholder={this.props.placeholder}
-        autoFocus={true}
-        value={this.state.text}
-        onBlur={this.handleBlur}
-        onChange={this.handleChange}
-        onKeyDown={this.handleSubmit} />
+      <div className={style.todo__input_wrapper}>
+        <input
+          className={classnames({
+            edit: this.props.editing,
+            'new-todo': this.props.newTodo
+          })}
+          type="text"
+          placeholder={this.props.placeholder}
+          autoFocus={true}
+          value={this.state.text}
+          onBlur={this.handleBlur}
+          onChange={this.handleChange}
+          onKeyDown={this.handleSubmit}
+        />
+      </div>
     )
   }
 }
