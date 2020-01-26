@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import cn from 'classnames'
 import style from './todo.module.css'
 
 export default class TodoTextInput extends Component {
@@ -40,7 +40,7 @@ export default class TodoTextInput extends Component {
     return (
       <div className={style.todo__input_wrapper}>
         <input
-          className={classnames({
+          className={cn({
             edit: this.props.editing,
             'new-todo': this.props.newTodo
           })}
