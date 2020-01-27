@@ -2,15 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Footer from './Footer'
 import VisibleTodoList from '../containers/VisibleTodoList'
+import style from '../todo.module.css'
+
 
 const MainSection = ({ todosCount, completedCount, actions }) =>
   (
-    <section className="main">
+    <section className={style.main}>
       {
         !!todosCount && 
         <span>
           <input
-            className="toggle-all"
+            className={style.toggle_all}
             type="checkbox"
             checked={completedCount === todosCount}
             readOnly
