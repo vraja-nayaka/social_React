@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TodoItem from './TodoItem'
 import style from './todo.module.css'
+// !Сделать отдельный модуль CSS
 
 const TodoList = ({ filteredTodos, actions }) => (
   <ul className={style.todo_list}>

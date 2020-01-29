@@ -1,11 +1,11 @@
 import React from 'react'
-import Header from './header/HeaderContainer'
-import MainSection from './mainSection/MainSectionContainer'
+import HeaderContainer from './header/HeaderContainer'
+import MainSectionContainer from './mainSection/MainSectionContainer'
 
 const App = () => (
   <div>
-    <Header />
-    <MainSection />
+    <HeaderContainer />
+    <MainSectionContainer />
   </div>
 )
 

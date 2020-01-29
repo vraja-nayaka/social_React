@@ -1,8 +1,8 @@
 import React from 'react'
 import { createRenderer } from 'react-test-renderer/shallow';
 import MainSection from './MainSection'
-import Footer from './Footer'
-import VisibleTodoList from '../containers/VisibleTodoList'
+import Footer from './footer/Footer'
+import VisibleTodoListContainer from './visibleTodoList/VisibleTodoListContainer'
 
 const setup = propOverrides => {
   const props = Object.assign({
@@ -83,7 +83,7 @@ describe('components', () => {
       it('should render', () => {
         const { output } = setup()
         const [ , visibleTodoList ] = output.props.children
-        expect(visibleTodoList.type).toBe(VisibleTodoList)
+        expect(visibleTodoList.type).toBe(VisibleTodoListContainer)
       })
     })
 
@@ -96,7 +96,7 @@ describe('components', () => {
         const renderedChildren = output.props.children
         .filter((item) => item !== false)
         expect(renderedChildren.length).toBe(1)
-        expect(renderedChildren[0].type).toBe(VisibleTodoList)
+        expect(renderedChildren[0].type).toBe(VisibleTodoListContainer)
       })
     })
   })

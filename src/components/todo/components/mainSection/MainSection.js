@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Footer from './Footer'
-import VisibleTodoList from '../containers/VisibleTodoList'
+import Footer from './footer/Footer'
+import VisibleTodoListContainer from './visibleTodoList/VisibleTodoListContainer'
 import style from '../todo.module.css'
 
 
@@ -20,7 +20,7 @@ const MainSection = ({ todosCount, completedCount, actions }) =>
           <label onClick={actions.completeAllTodos}/>
         </span>
       }
-      <VisibleTodoList />
+      <VisibleTodoListContainer />
       {
         !!todosCount &&
         <Footer

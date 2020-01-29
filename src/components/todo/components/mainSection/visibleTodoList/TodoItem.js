@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import cn from 'classnames'
 import TodoTextInput from './TodoTextInput'
 
 export default class TodoItem extends Component {
@@ -55,7 +55,7 @@ export default class TodoItem extends Component {
     }
 
     return (
-      <li className={classnames({
+      <li className={cn({
         completed: todo.completed,
         editing: this.state.editing
       })}>
