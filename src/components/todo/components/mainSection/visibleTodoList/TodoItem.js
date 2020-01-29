@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 import TodoTextInput from './TodoTextInput'
+import style from './mainSection.module.css'
 
 export default class TodoItem extends Component {
   static propTypes = {
@@ -40,15 +41,15 @@ export default class TodoItem extends Component {
       )
     } else {
       element = (
-        <div className="view">
-          <input className="toggle"
+        <div className={style.view}>
+          <input className={style.toggle}
                  type="checkbox"
                  checked={todo.completed}
                  onChange={() => completeTodo(todo.id)} />
           <label onDoubleClick={this.handleDoubleClick}>
             {todo.text}
           </label>
-          <button className="destroy"
+          <button className={style.destroy}
                   onClick={() => deleteTodo(todo.id)} />
         </div>
       )
