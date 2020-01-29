@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
-import TodoTextInput from './TodoTextInput'
-import style from './mainSection.module.css'
+import TodoTextInput from '../../common/TodoTextInput'
+import style from '../mainSection.module.css'
 
 export default class TodoItem extends Component {
   static propTypes = {

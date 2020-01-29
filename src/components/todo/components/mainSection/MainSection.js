@@ -16,6 +16,7 @@ const MainSection = ({ todosCount, completedCount, actions }) =>
             type="checkbox"
             checked={completedCount === todosCount}
             readOnly
+            onChange={actions.completeAllTodos}
           />
           <label onClick={actions.completeAllTodos}/>
         </span>

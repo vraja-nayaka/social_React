@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import TodoItem from './TodoItem'
-import style from './mainSection.module.css'
+import style from '../mainSection.module.css'
 
 const TodoList = ({ filteredTodos, actions }) => (
   <ul className={style.todo_list}>

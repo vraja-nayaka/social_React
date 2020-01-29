@@ -147,3 +147,16 @@
 .todo-list li.editing:last-child {
 	margin-bottom: -1px;
 }
+
+.clear_completed,
+html .clear-completed:active {
+	float: right;
+	position: relative;
+	line-height: 20px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.clear_completed:hover {
+	text-decoration: underline;
+}
