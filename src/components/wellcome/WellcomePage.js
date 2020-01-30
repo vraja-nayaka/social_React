@@ -4,7 +4,10 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
-    text: {
+    papper: {
+        height: 340
+      },
+        text: {
       padding: theme.spacing(2, 2, 0)
     }
   }))
@@ -13,7 +16,7 @@ const WellcomePage = () => {
     const classes = useStyles()
     return (
         <div>
-            <Paper elevation={3}>
+            <Paper className={classes.papper} elevation={3}>
                 <Typography variant="h5" className={classes.text} gutterBottom>
                     Приветствуем Вас в "SamuraiJS"!
                 </Typography>

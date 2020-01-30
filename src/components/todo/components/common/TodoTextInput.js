@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
-import style from '../todo.module.css'
+import TextField from '@material-ui/core/TextField';
+
 
 export default class TodoTextInput extends Component {
   static propTypes = {
@@ -37,21 +38,20 @@ export default class TodoTextInput extends Component {
   }
 
   render() {
+
     return (
-      <div className={style.todo__input_wrapper}>
-        <input
+      <div>
+        <TextField id="outlined-basic" label="New todo" variant="outlined"
           className={cn({
             'style.edit': this.props.editing,
             'style.new_todo': this.props.newTodo
           })}
-          type="text"
           placeholder={this.props.placeholder}
           autoFocus={true}
           value={this.state.text}
           onBlur={this.handleBlur}
           onChange={this.handleChange}
-          onKeyDown={this.handleSubmit}
-        />
+          onKeyDown={this.handleSubmit} />
       </div>
     )
   }
