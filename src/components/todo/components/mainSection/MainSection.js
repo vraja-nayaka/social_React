@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Footer from './footer/Footer'
 import VisibleTodoListContainer from './visibleTodoList/VisibleTodoListContainer'
 import { makeStyles } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
 import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
