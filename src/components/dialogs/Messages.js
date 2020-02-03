@@ -1,22 +1,44 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { Field, reset, reduxForm } from 'redux-form'
-import { requiredMessage, maxLength30, Input } from './../../utils/validators'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Field, reset, reduxForm } from "redux-form";
+import { requiredMessage, maxLength30, Input } from "./../../utils/validators";
 
-import useMediaQuery from '@material-ui/core/useMediaQuery'
-import { makeStyles } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import Paper from '@material-ui/core/Paper'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import ListSubheader from '@material-ui/core/ListSubheader'
-import SendSharpIcon from '@material-ui/icons/SendSharp'
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import SendSharpIcon from "@material-ui/icons/SendSharp";
 
 const useStyles = makeStyles(theme => ({
+  wrapper: {},
+  content: {},
+  footer: {
+    background: "#009688",
+    maxWidth: 896,
+    height: "25",
+    margin: "auto",
+    position: "fixed",
+    top: "auto",
+    left: "0",
+    bottom: "0",
+    right: "0",
+    zIndex: "12"
+  },
+  footerPhone: {
+    bottom: "55px",
+    right: 15,
+    left: 15
+  },
+  toolbar: {
+    justifyItems: "flex-start"
+  },
   text: {
     padding: theme.spacing(2, 2, 0)
   },
@@ -31,42 +53,31 @@ const useStyles = makeStyles(theme => ({
   },
   subheader: {
     backgroundColor: theme.palette.background.paper
-  },
-  appBar: {
-    top: 'auto',
-    bottom: '0px',
-    maxWidth: 876,
-    left: '0px',
-    width: '100vw',
-    zIndex: '1'
-  },
-  appBarPhone: {
-    bottom: '55px'
   }
-}))
+}));
 
 const Messages = ({ messages, sendMessage }) => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   const MessagesElements = messages.map(({ id, message }) => (
     <React.Fragment key={id}>
       {id === 1 && (
-        <ListSubheader className={classes.subheader}>Today</ListSubheader>
+        <ListSubheader className={classes.subheader}>Yesterday</ListSubheader>
       )}
       {id === 3 && (
-        <ListSubheader className={classes.subheader}>Yesterday</ListSubheader>
+        <ListSubheader className={classes.subheader}>Today</ListSubheader>
       )}
       <ListItem button>
         <ListItemText primary={message} />
       </ListItem>
     </React.Fragment>
-  ))
+  ));
 
   const pathLink = React.forwardRef((props, ref) => (
-    <NavLink innerRef={ref} to={'/dialogs'} {...props} />
-  ))
+    <NavLink innerRef={ref} to={"/dialogs"} {...props} />
+  ));
 
-  const matches = useMediaQuery('(min-width:600px)')
+  const matches = useMediaQuery("(min-width:600px)");
   return (
     <div>
       <Button
@@ -84,23 +95,21 @@ const Messages = ({ messages, sendMessage }) => {
       <Paper square className={matches ? classes.paper : classes.paperPhone}>
         <List className={classes.list}>{MessagesElements}</List>
       </Paper>
-      <AddMessageReduxForm
-        onSubmit={({ newMessage }) => sendMessage(newMessage)}
-        matches={matches}
-      />
+      <div className={`${classes.footer} ${!matches && classes.footerPhone}`}>
+        <AddMessageReduxForm
+          onSubmit={({ newMessage }) => sendMessage(newMessage)}
+          matches={matches}
+        />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 const AddMessageForm = ({ handleSubmit, matches }) => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
-    <AppBar
-      position="fixed"
-      color="secondary"
-      className={`${classes.appBar} ${!matches && classes.appBarPhone}`}
-    >
-      <Toolbar>
+    <div>
+      <Toolbar className={classes.toolbar}>
         <form onSubmit={handleSubmit}>
           <Field
             placeholder="Введите Ваше сообщение"
@@ -114,15 +123,15 @@ const AddMessageForm = ({ handleSubmit, matches }) => {
           </Button>
         </form>
       </Toolbar>
-    </AppBar>
-  )
-}
+    </div>
+  );
+};
 
-const afterSubmit = (result, dispatch) => dispatch(reset('newMessage'))
+const afterSubmit = (result, dispatch) => dispatch(reset("newMessage"));
 
 const AddMessageReduxForm = reduxForm({
-  form: 'newMessage',
+  form: "newMessage",
   onSubmitSuccess: afterSubmit
-})(AddMessageForm)
+})(AddMessageForm);
 
-export default Messages
+export default Messages;
