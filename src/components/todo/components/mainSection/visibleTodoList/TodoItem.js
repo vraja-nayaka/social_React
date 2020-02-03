@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import cn from 'classnames'
 import TodoTextInput from '../../common/TodoTextInput'
 import style from '../mainSection.module.css'
+import Button from '@material-ui/core/Button'
 
 export default class TodoItem extends Component {
   static propTypes = {
@@ -49,7 +50,7 @@ export default class TodoItem extends Component {
           <label onDoubleClick={this.handleDoubleClick}>
             {todo.text}
           </label>
-          <button className={style.destroy}
+          <button variant="outlined" color="inherit" className={style.destroy}
                   onClick={() => deleteTodo(todo.id)} />
         </div>
       )

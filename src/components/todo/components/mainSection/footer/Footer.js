@@ -14,11 +14,11 @@ const Footer = (props) => {
   const { activeCount, completedCount, onClearCompleted } = props
   const itemWord = activeCount === 1 ? 'item' : 'items'
   return (
-    <footer className="footer">
-      <span className="todo-count">
+    <footer className={style.footer}>
+      <span className={style.todo_count}>
         <strong>{activeCount || 'No'}</strong> {itemWord} left
       </span>
-      <ul className="filters">
+      <ul className={style.filters}>
         {Object.keys(FILTER_TITLES).map(filter =>
           <li key={filter}>
             <FilterLink filter={filter}>
