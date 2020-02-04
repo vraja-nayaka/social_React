@@ -4,7 +4,7 @@ import profileReducer from "./profile-reducer";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
 import appReducer from "./app-reducer";
-import todoReducer, {visibilityFilter} from "./todos-reducer";
+import todoReducer, {visibilityFilter} from "./todo-reducer";
 import thunkMiddleware from "redux-thunk";
 import { reducer as formReducer } from 'redux-form';
 import {compose} from "redux";

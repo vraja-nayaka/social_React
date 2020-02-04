@@ -17,8 +17,6 @@ export const completeAllTodos = () => ({ type: COMPLETE_ALL_TODOS })
 export const clearCompleted = () => ({ type: CLEAR_COMPLETED })
 export const setVisibilityFilter = filter => ({ type: SET_VISIBILITY_FILTER, filter})
 
-
-
 const initialState = [
   {
     text: 'Use Redux',
