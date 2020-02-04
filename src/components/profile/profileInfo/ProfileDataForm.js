@@ -1,10 +1,10 @@
-import React from 'react'
-import style from './../profile.module.css'
-import { reduxForm, Field } from 'redux-form'
-import { Input, required } from '../../../utils/validators'
-import s from './../../../utils/FormsControls.module.css'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Button from '@material-ui/core/Button'
+import React from 'react';
+import { reduxForm, Field } from 'redux-form';
+import { Input, required } from '../../../utils/validators';
+import s from './../../../utils/FormsControls.module.css';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const ProfileDataForm = ({ handleSubmit, profile, error }) => {
   return (
@@ -39,7 +39,7 @@ const ProfileDataForm = ({ handleSubmit, profile, error }) => {
             <Field
               name="lookingForAJob"
               type="checkbox"
-              component={Input}
+              component={Checkbox}
               validate={[]}
             />
           }

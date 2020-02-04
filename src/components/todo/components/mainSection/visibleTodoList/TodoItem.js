@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import cn from 'classnames'
 import TodoTextInput from '../../common/TodoTextInput'
 import style from '../mainSection.module.css'
-import Button from '@material-ui/core/Button'
 
 export default class TodoItem extends Component {
   static propTypes = {
@@ -57,10 +55,7 @@ export default class TodoItem extends Component {
     }
 
     return (
-      <li className={cn({
-        completed: todo.completed,
-        editing: this.state.editing
-      })}>
+      <li >
         {element}
       </li>
     )

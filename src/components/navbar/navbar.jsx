@@ -9,6 +9,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import AccountIcon from '@material-ui/icons/AccountCircleSharp'
 import ChatIcon from '@material-ui/icons/Chat'
 import PeopleIcon from '@material-ui/icons/People'
+import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import Paper from '@material-ui/core/Paper'
 
 const useStyles = makeStyles({
@@ -38,6 +39,8 @@ export default withRouter(function Navbar({ location }) {
         return setValue(1)
       case 'users':
         return setValue(2)
+      case 'todo':
+        return setValue(3)
       default:
         return setValue(null)
     }
@@ -68,6 +71,12 @@ export default withRouter(function Navbar({ location }) {
             component={NavLink}
             to={'/users'}
             icon={<PeopleIcon />}
+          />
+          <BottomNavigationAction
+            label="Todo"
+            component={NavLink}
+            to={'/todo'}
+            icon={<PlaylistAddCheckIcon />}
           />
         </BottomNavigation>
       </Paper>

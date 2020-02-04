@@ -1,52 +1,38 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Footer from './footer/Footer'
-import VisibleTodoListContainer from './visibleTodoList/VisibleTodoListContainer'
-import { makeStyles } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
-import Paper from '@material-ui/core/Paper';
+import React from "react";
+import PropTypes from "prop-types";
+import Footer from "./footer/Footer";
+import VisibleTodoListContainer from "./visibleTodoList/VisibleTodoListContainer";
+import Paper from "@material-ui/core/Paper";
+import Checkbox from "@material-ui/core/Checkbox";
 
-const useStyles = makeStyles(theme => ({
-  main: {
-
-  },
-  toggle_all: {
-
-  }
-}));
-
-const MainSection = ({ todosCount, completedCount, actions }) => {
-  const classes = useStyles();
-  return <Paper className={classes.main}>
-    {
-      !!todosCount &&
+const MainSection = ({ todosCount, completedCount, actions }) => (
+  <Paper>
+    {!!todosCount && (
       <span>
-        <input
-          className={classes.toggle_all}
+        <Checkbox
           type="checkbox"
           checked={completedCount === todosCount}
           readOnly
           onChange={actions.completeAllTodos}
         />
-        <label onClick={actions.completeAllTodos} />
+        <label onClick={actions.completeAllTodos}>Select all </label>
       </span>
-    }
+    )}
     <VisibleTodoListContainer />
-    {
-      !!todosCount &&
+    {!!todosCount && (
       <Footer
         completedCount={completedCount}
         activeCount={todosCount - completedCount}
         onClearCompleted={actions.clearCompleted}
       />
-    }
+    )}
   </Paper>
-}
+);
 
 MainSection.propTypes = {
   todosCount: PropTypes.number.isRequired,
   completedCount: PropTypes.number.isRequired,
   actions: PropTypes.object.isRequired
-}
+};
 
 export default MainSection;
