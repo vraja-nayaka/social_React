@@ -1,81 +1,116 @@
-export const DELETE_TODO = 'DELETE_TODO'
-export const EDIT_TODO = 'EDIT_TODO'
-export const COMPLETE_TODO = 'COMPLETE_TODO'
-export const COMPLETE_ALL_TODOS = 'COMPLETE_ALL_TODOS'
-export const CLEAR_COMPLETED = 'CLEAR_COMPLETED'
-export const ADD_TODO = 'ADD_TODO'
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
-export const SHOW_ALL = 'show_all'
-export const SHOW_COMPLETED = 'show_completed'
-export const SHOW_ACTIVE = 'show_active'
+import { todoAPI } from "./../api/api";
 
-export const addTodo = text => ({ type: ADD_TODO, text })
-export const deleteTodo = id => ({ type: DELETE_TODO, id })
-export const editTodo = (id, text) => ({ type: EDIT_TODO, id, text })
-export const completeTodo = id => ({ type: COMPLETE_TODO, id })
-export const completeAllTodos = () => ({ type: COMPLETE_ALL_TODOS })
-export const clearCompleted = () => ({ type: CLEAR_COMPLETED })
-export const setVisibilityFilter = filter => ({ type: SET_VISIBILITY_FILTER, filter})
+export const SET_TODO_LISTS = "SET_TODO_LISTS";
+export const DELETE_TODO = "DELETE_TODO";
+export const EDIT_TODO = "EDIT_TODO";
+export const COMPLETE_TODO = "COMPLETE_TODO";
+export const COMPLETE_ALL_TODOS = "COMPLETE_ALL_TODOS";
+export const CLEAR_COMPLETED = "CLEAR_COMPLETED";
+export const ADD_TODO = "ADD_TODO";
+export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
+export const SHOW_ALL = "show_all";
+export const SHOW_COMPLETED = "show_completed";
+export const SHOW_ACTIVE = "show_active";
 
-const initialState = [
-  {
-    text: 'Use Redux',
-    completed: false,
-    id: 0
-  }
-]
+export const setTodoLists = todoLists => ({ type: SET_TODO_LISTS, todoLists });
+export const addTodo = text => ({ type: ADD_TODO, text });
+export const deleteTodo = id => ({ type: DELETE_TODO, id });
+export const editTodo = (id, text) => ({ type: EDIT_TODO, id, text });
+export const completeTodo = id => ({ type: COMPLETE_TODO, id });
+export const completeAllTodos = () => ({ type: COMPLETE_ALL_TODOS });
+export const clearCompleted = () => ({ type: CLEAR_COMPLETED });
+export const setVisibilityFilter = filter => ({
+  type: SET_VISIBILITY_FILTER,
+  filter
+});
+
+const initialState = {
+  todoLists: null,
+  tasks: [{ id: 0, completed: false, text: "My first TODO" }]
+};
 
 export default function todoReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_TODO:
-      return [
+    case SET_TODO_LISTS:
+      return {
         ...state,
-        {
-          id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-          completed: false,
-          text: action.text
-        }
-      ]
+        todoLists: [action.todoLists]
+      };
+
+    case ADD_TODO:
+      return {
+        ...state,
+        tasks: [
+          ...state.tasks,
+          {
+            id:
+              state.tasks.reduce(
+                (maxId, todo) => Math.max(todo.id, maxId),
+                -1
+              ) + 1,
+            completed: false,
+            text: action.text
+          }
+        ]
+      };
 
     case DELETE_TODO:
-      return state.filter(todo =>
-        todo.id !== action.id
-      )
-
+      return {
+        ...state,
+        tasks: state.tasks.filter(todo => todo.id !== action.id)
+      };
     case EDIT_TODO:
-      return state.map(todo =>
-        todo.id === action.id ?
-          { ...todo, text: action.text } :
-          todo
-      )
+      return {
+        ...state,
+        tasks: state.tasks.map(todo =>
+          todo.id === action.id ? { ...todo, text: action.text } : todo
+        )
+      };
 
     case COMPLETE_TODO:
-      return state.map(todo =>
-        todo.id === action.id ?
-          { ...todo, completed: !todo.completed } :
-          todo
-      )
+      return {
+        ...state,
+        tasks: state.tasks.map(todo =>
+          todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
+        )
+      };
 
     case COMPLETE_ALL_TODOS:
-      const areAllMarked = state.every(todo => todo.completed)
-      return state.map(todo => ({
-        ...todo,
-        completed: !areAllMarked
-      }))
+      const areAllMarked = state.tasks.every(todo => todo.completed);
+      return {
+        ...state,
+        tasks: state.tasks.map(todo => ({
+          ...todo,
+          completed: !areAllMarked
+        }))
+      };
 
     case CLEAR_COMPLETED:
-      return state.filter(todo => todo.completed === false)
+      return {
+        ...state,
+        tasks: state.tasks.filter(todo => todo.completed === false)
+      };
 
     default:
-      return state
+      return state;
   }
 }
 
 export const visibilityFilter = (state = SHOW_ALL, action) => {
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
-      return action.filter
+      return action.filter;
     default:
-      return state
+      return state;
   }
-}
+};
+
+export const requestTodoLists = () => {
+  return dispatch => {
+    todoAPI.getTodoLists().then(response => {
+      if (response.data.resultCode === 0) {
+        dispatch(setTodoLists(response));
+      }
+    });
+  };
+};

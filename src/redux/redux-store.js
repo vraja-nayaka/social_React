@@ -17,7 +17,7 @@ const reducers = combineReducers({
   auth: authReducer,
   form: formReducer,
   app: appReducer,
-  todos: todoReducer,
+  todo: todoReducer,
   visibilityFilter: visibilityFilter
 });
 

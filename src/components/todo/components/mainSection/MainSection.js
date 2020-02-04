@@ -15,7 +15,7 @@ const MainSection = ({ todosCount, completedCount, actions }) => (
           readOnly
           onChange={actions.completeAllTodos}
         />
-        <label onClick={actions.completeAllTodos}>Select all </label>
+        <label onClick={actions.completeAllTodos}>Complete all</label>
       </span>
     )}
     <VisibleTodoListContainer />

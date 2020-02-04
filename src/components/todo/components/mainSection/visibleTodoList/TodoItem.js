@@ -35,6 +35,7 @@ export default class TodoItem extends Component {
     if (this.state.editing) {
       element = (
         <TodoTextInput text={todo.text}
+                       label="Edit task"
                        editing={this.state.editing}
                        onSave={(text) => this.handleSave(todo.id, text)} />
       )

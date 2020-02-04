@@ -16,6 +16,7 @@ const Header = ({ addTodo }) => {
       <div className={classes.main}>
       <TodoTextInput
         newTodo
+        label="New task"
         onSave={text => {
           if (text.length !== 0) {
             addTodo(text);

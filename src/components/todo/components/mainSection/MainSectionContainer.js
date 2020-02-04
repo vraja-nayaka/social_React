@@ -6,7 +6,7 @@ import { getCompletedTodoCount } from '../../../../redux/todo-selectors'
 
 
 const mapStateToProps = state => ({
-  todosCount: state.todos.length,
+  todosCount: state.todo.tasks.length,
   completedCount: getCompletedTodoCount(state)
 })
 
