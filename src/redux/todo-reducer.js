@@ -1,18 +1,20 @@
 import { todoAPI } from "./../api/api";
 
 export const SET_TODO_LISTS = "SET_TODO_LISTS";
+export const ADD_TODO_LISTS = "ADD_TODO_LISTS";
+export const ADD_TODO = "ADD_TODO";
 export const DELETE_TODO = "DELETE_TODO";
 export const EDIT_TODO = "EDIT_TODO";
 export const COMPLETE_TODO = "COMPLETE_TODO";
 export const COMPLETE_ALL_TODOS = "COMPLETE_ALL_TODOS";
 export const CLEAR_COMPLETED = "CLEAR_COMPLETED";
-export const ADD_TODO = "ADD_TODO";
 export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
 export const SHOW_ALL = "show_all";
 export const SHOW_COMPLETED = "show_completed";
 export const SHOW_ACTIVE = "show_active";
 
 export const setTodoLists = todoLists => ({ type: SET_TODO_LISTS, todoLists });
+export const addTodoLists = todoLists => ({ type: ADD_TODO_LISTS, todoLists });
 export const addTodo = text => ({ type: ADD_TODO, text });
 export const deleteTodo = id => ({ type: DELETE_TODO, id });
 export const editTodo = (id, text) => ({ type: EDIT_TODO, id, text });
@@ -25,7 +27,7 @@ export const setVisibilityFilter = filter => ({
 });
 
 const initialState = {
-  todoLists: null,
+  todoLists: [{id: 0, text: "My first list"}],
   tasks: [{ id: 0, completed: false, text: "My first TODO" }]
 };
 
@@ -35,6 +37,12 @@ export default function todoReducer(state = initialState, action) {
       return {
         ...state,
         todoLists: [action.todoLists]
+      };
+
+    case ADD_TODO_LISTS:
+      return {
+        ...state,
+        todoLists: [...state.todoLists, action.todoLists]
       };
 
     case ADD_TODO:
@@ -113,4 +121,18 @@ export const requestTodoLists = () => {
       }
     });
   };
+};
+
+export const postTodoLists = ({ title }) => async dispatch => {
+  const response = await todoAPI.postTodoLists(title);
+  if (response.data.resultCode === 0) {
+    let { id, title, addedDate, order } = response.data.item;
+    dispatch(setTodoLists(id, title, addedDate, order));
+  } else {
+    let message =
+      response.data.messages.length > 0
+        ? response.data.messages[0]
+        : "Some error";
+    dispatch(setTodoLists({ error: message }));
+  }
 };
