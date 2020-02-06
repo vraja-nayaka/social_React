@@ -78,7 +78,7 @@ export const todoAPI = {
         return instanceNew.get(`todo-lists`)
     },
     postTodoLists(title) {
-        return instanceNew.post(`todo-lists`, title)
+        return instanceNew.post(`todo-lists`, {title})
     },
 
 

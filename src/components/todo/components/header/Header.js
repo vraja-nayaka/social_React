@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import TodoTextInput from "../common/TodoTextInput";
 import TodoLists from "./TodoLists";
@@ -10,19 +10,33 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Header = ({ todoLists, addTodo, requestTodoLists, addTodoLists }) => {
+const Header = ({
+  todoLists,
+  addTodo,
+  requestTodoLists,
+  postTodoLists,
+  setTodoLists
+}) => {
   const classes = useStyles();
   const saveText = text => {
     if (text.length !== 0) {
       addTodo(text);
     }
   };
+  
+  if (todoLists.length === 0) {
+    requestTodoLists();
+  }
 
   return (
     <header>
-      {/* <div className={classes.main}>
-        <TodoLists todoLists={todoLists} addTodoLists={addTodoLists} requestTodoLists={requestTodoLists}/>
-      </div> */}
+      <div className={classes.main}>
+        <TodoLists
+          todoLists={todoLists}
+          postTodoLists={postTodoLists}
+          requestTodoLists={requestTodoLists}
+        />
+      </div>
 
       <div className={classes.main}>
         <TodoTextInput

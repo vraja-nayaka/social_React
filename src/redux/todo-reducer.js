@@ -27,23 +27,37 @@ export const setVisibilityFilter = filter => ({
 });
 
 const initialState = {
-  todoLists: [{id: 0, text: "My first list"}],
+  todoLists: [],
   tasks: [{ id: 0, completed: false, text: "My first TODO" }]
 };
 
 export default function todoReducer(state = initialState, action) {
   switch (action.type) {
+    // TODO_LISTS
+
     case SET_TODO_LISTS:
       return {
         ...state,
-        todoLists: [action.todoLists]
+        todoLists: action.todoLists
       };
 
     case ADD_TODO_LISTS:
       return {
         ...state,
-        todoLists: [...state.todoLists, action.todoLists]
+        todoLists: [
+          ...state.todoLists,
+          {
+            id:
+              state.todoLists.reduce(
+                (maxId, list) => Math.max(list.id, maxId),
+                -1
+              ) + 1,
+            title: action.todoLists.title
+          }
+        ]
       };
+
+    // TODO_TASKS
 
     case ADD_TODO:
       return {
@@ -113,21 +127,18 @@ export const visibilityFilter = (state = SHOW_ALL, action) => {
   }
 };
 
-export const requestTodoLists = () => {
-  return dispatch => {
-    todoAPI.getTodoLists().then(response => {
-      if (response.data.resultCode === 0) {
-        dispatch(setTodoLists(response));
-      }
-    });
-  };
+export const requestTodoLists = () => async dispatch => {
+  const response = await todoAPI.getTodoLists();
+  if (response.data !== null) {
+    dispatch(setTodoLists(response.data));
+  }
+  else {dispatch(setTodoLists([{ id: 0, title: "Create your first TODOLIST" }])); }
 };
 
-export const postTodoLists = ({ title }) => async dispatch => {
+export const postTodoLists = title => async dispatch => {
   const response = await todoAPI.postTodoLists(title);
   if (response.data.resultCode === 0) {
-    let { id, title, addedDate, order } = response.data.item;
-    dispatch(setTodoLists(id, title, addedDate, order));
+    dispatch(addTodoLists(response.data.data.item));
   } else {
     let message =
       response.data.messages.length > 0
