@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import TodoTextInput from "../common/TodoTextInput";
 import TodoLists from "./TodoLists";
@@ -14,8 +14,8 @@ const Header = ({
   todoLists,
   addTodo,
   requestTodoLists,
-  postTodoLists,
-  setTodoLists
+  postTodoList,
+  deleteTodoList
 }) => {
   const classes = useStyles();
   const saveText = text => {
@@ -23,7 +23,7 @@ const Header = ({
       addTodo(text);
     }
   };
-  
+
   if (todoLists.length === 0) {
     requestTodoLists();
   }
@@ -33,8 +33,9 @@ const Header = ({
       <div className={classes.main}>
         <TodoLists
           todoLists={todoLists}
-          postTodoLists={postTodoLists}
+          postTodoList={postTodoList}
           requestTodoLists={requestTodoLists}
+          deleteTodoList={deleteTodoList}
         />
       </div>
 

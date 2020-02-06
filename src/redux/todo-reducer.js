@@ -1,7 +1,8 @@
 import { todoAPI } from "./../api/api";
 
 export const SET_TODO_LISTS = "SET_TODO_LISTS";
-export const ADD_TODO_LISTS = "ADD_TODO_LISTS";
+export const ADD_TODO_LIST = "ADD_TODO_LIST";
+export const DELETE_TODO_LIST = "DELETE_TODO_LIST";
 export const ADD_TODO = "ADD_TODO";
 export const DELETE_TODO = "DELETE_TODO";
 export const EDIT_TODO = "EDIT_TODO";
@@ -14,7 +15,8 @@ export const SHOW_COMPLETED = "show_completed";
 export const SHOW_ACTIVE = "show_active";
 
 export const setTodoLists = todoLists => ({ type: SET_TODO_LISTS, todoLists });
-export const addTodoLists = todoLists => ({ type: ADD_TODO_LISTS, todoLists });
+export const addTodoList = todoLists => ({ type: ADD_TODO_LIST, todoLists });
+export const deleteTodoLists = id => ({ type: DELETE_TODO_LIST, id});
 export const addTodo = text => ({ type: ADD_TODO, text });
 export const deleteTodo = id => ({ type: DELETE_TODO, id });
 export const editTodo = (id, text) => ({ type: EDIT_TODO, id, text });
@@ -41,7 +43,23 @@ export default function todoReducer(state = initialState, action) {
         todoLists: action.todoLists
       };
 
-    case ADD_TODO_LISTS:
+    case ADD_TODO_LIST:
+      return {
+        ...state,
+        todoLists: [
+          ...state.todoLists,
+          {
+            id:
+              state.todoLists.reduce(
+                (maxId, list) => Math.max(list.id, maxId),
+                -1
+              ) + 1,
+            title: action.todoLists.title
+          }
+        ]
+      };
+
+    case DELETE_TODO_LIST:
       return {
         ...state,
         todoLists: [
@@ -135,13 +153,26 @@ export const requestTodoLists = () => async dispatch => {
   else {dispatch(setTodoLists([{ id: 0, title: "Create your first TODOLIST" }])); }
 };
 
-export const postTodoLists = title => async dispatch => {
-  const response = await todoAPI.postTodoLists(title);
+export const postTodoList = title => async dispatch => {
+  const response = await todoAPI.postTodoList(title);
   if (response.data.resultCode === 0) {
-    dispatch(addTodoLists(response.data.data.item));
+    dispatch(addTodoList(response.data.data.item));
   } else {
     let message =
-      response.data.messages.length > 0
+      (response.data.messages.length > 0)
+        ? response.data.messages[0]
+        : "Some error";
+    dispatch(setTodoLists({ error: message }));
+  }
+};
+
+export const deleteTodoList = todolistId => async dispatch => {
+  const response = await todoAPI.deleteTodoList(todolistId);
+  if (response.data.resultCode === 0) {
+    dispatch(requestTodoLists());
+  } else {
+    let message =
+      (response.data.messages.length > 0)
         ? response.data.messages[0]
         : "Some error";
     dispatch(setTodoLists({ error: message }));

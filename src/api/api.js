@@ -33,10 +33,10 @@ export const usersAPI = {
 
 export const profileAPI = {
     getProfile(userId) {
-        return instanceOld.get(`profile/` + userId)
+        return instanceOld.get(`profile/${userId}`)
     },
     getStatus(userId) {
-        return instanceOld.get(`profile/status/` + userId)
+        return instanceOld.get(`profile/status/${userId}`)
     },
     updateStatus(status) {
         return instanceOld.put(`profile/status`, { status: status })
@@ -77,8 +77,14 @@ export const todoAPI = {
     getTodoLists() {
         return instanceNew.get(`todo-lists`)
     },
-    postTodoLists(title) {
+    postTodoList(title) {
         return instanceNew.post(`todo-lists`, {title})
+    },
+    deleteTodoList(todolistId) {
+        return instanceNew.delete(`todo-lists/${todolistId}`)
+    },
+    putTodoList(todolistId, title) {
+        return instanceNew.put(`todo-lists/${todolistId}`, {title})
     },
 
 

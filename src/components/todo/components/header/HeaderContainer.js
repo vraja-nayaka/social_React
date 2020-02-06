@@ -3,9 +3,9 @@ import Header from "./Header";
 import { addTodo } from "../../actions";
 import {
   requestTodoLists,
-  addTodoLists,
-  postTodoLists,
-  setTodoLists
+  addTodoList,
+  postTodoList,
+  deleteTodoList
 } from "../../../../redux/todo-reducer";
 
 const mapStateToProps = state => ({
@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   addTodo,
   requestTodoLists,
-  addTodoLists,
-  postTodoLists,
-  setTodoLists
+  addTodoList,
+  postTodoList,
+  deleteTodoList
 })(Header);
