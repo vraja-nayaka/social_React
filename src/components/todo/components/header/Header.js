@@ -15,7 +15,8 @@ const Header = ({
   addTodo,
   requestTodoLists,
   postTodoList,
-  deleteTodoList
+  deleteTodoList,
+  putTodoList
 }) => {
   const classes = useStyles();
   const saveText = text => {
@@ -36,6 +37,7 @@ const Header = ({
           postTodoList={postTodoList}
           requestTodoLists={requestTodoLists}
           deleteTodoList={deleteTodoList}
+          putTodoList={putTodoList}
         />
       </div>
 

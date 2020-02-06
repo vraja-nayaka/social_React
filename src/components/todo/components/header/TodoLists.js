@@ -3,11 +3,12 @@ import TodoTextInput from "../common/TodoTextInput";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   main: {
-    padding: 20
+    
   }
 }));
 
@@ -15,7 +16,8 @@ const TodoLists = ({
   todoLists,
   postTodoList,
   requestTodoLists,
-  deleteTodoList
+  deleteTodoList,
+  putTodoList
 }) => {
   const classes = useStyles();
   const newTodoList = title => {
@@ -32,7 +34,7 @@ const TodoLists = ({
       <ul>
         {todoLists.map(item => (
           <li key={item.id}>
-            <div>
+            <Button variant="contained" color="secondary" size="small">
               {item.title}
               <IconButton
                 aria-label="delete"
@@ -41,7 +43,13 @@ const TodoLists = ({
               >
                 <DeleteIcon fontSize="small" color="disabled" />
               </IconButton>
-            </div>
+              <IconButton
+                aria-label="delete"
+                onClick={() => putTodoList(item.id, "renamed title")}
+              >
+                <EditIcon fontSize="small"/>
+              </IconButton>
+              </Button>
           </li>
         ))}
       </ul>

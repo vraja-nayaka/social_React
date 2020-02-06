@@ -5,7 +5,8 @@ import {
   requestTodoLists,
   addTodoList,
   postTodoList,
-  deleteTodoList
+  deleteTodoList,
+  putTodoList
 } from "../../../../redux/todo-reducer";
 
 const mapStateToProps = state => ({
@@ -17,5 +18,6 @@ export default connect(mapStateToProps, {
   requestTodoLists,
   addTodoList,
   postTodoList,
-  deleteTodoList
+  deleteTodoList,
+  putTodoList
 })(Header);
