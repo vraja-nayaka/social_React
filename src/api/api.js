@@ -97,11 +97,6 @@ export const todoAPI = {
       putAfterItemId
     });
   },
-  putTodoListReorder(todolistId, putAfterItemId) {
-    return instanceNew.put(`todo-lists/${todolistId}/reorder`, {
-      putAfterItemId
-    });
-  },
 
   getTodoListTasks(todolistId, count, page) {
     return instanceNew.get(`todo-lists/${todolistId}/tasks`, { count, page });

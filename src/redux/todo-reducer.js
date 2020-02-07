@@ -2,11 +2,14 @@ import { todoAPI } from "./../api/api";
 
 export const SET_TODO_LISTS = "SET_TODO_LISTS";
 export const ADD_TODO_LIST = "ADD_TODO_LIST";
+export const ERR_TODO_LIST = "ERR_TODO_LIST";
+export const SET_TODO_LIST_TASKS = "SET_TODO_LIST_TASKS";
 export const ADD_TODO = "ADD_TODO";
 export const DELETE_TODO = "DELETE_TODO";
 export const EDIT_TODO = "EDIT_TODO";
 export const COMPLETE_TODO = "COMPLETE_TODO";
 export const COMPLETE_ALL_TODOS = "COMPLETE_ALL_TODOS";
+export const ERR_TODO = "ERR_TODO";
 export const CLEAR_COMPLETED = "CLEAR_COMPLETED";
 export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
 export const SHOW_ALL = "show_all";
@@ -15,11 +18,14 @@ export const SHOW_ACTIVE = "show_active";
 
 export const setTodoLists = todoLists => ({ type: SET_TODO_LISTS, todoLists });
 export const addTodoList = todoLists => ({ type: ADD_TODO_LIST, todoLists });
+export const setTodoListTasks = tasks => ({ type: SET_TODO_LIST_TASKS, tasks });
+export const errTodoList = err => ({ type: ERR_TODO_LIST, err });
 export const addTodo = text => ({ type: ADD_TODO, text });
 export const deleteTodo = id => ({ type: DELETE_TODO, id });
 export const editTodo = (id, text) => ({ type: EDIT_TODO, id, text });
 export const completeTodo = id => ({ type: COMPLETE_TODO, id });
 export const completeAllTodos = () => ({ type: COMPLETE_ALL_TODOS });
+export const errTodo = err => ({ type: ERR_TODO, err });
 export const clearCompleted = () => ({ type: CLEAR_COMPLETED });
 export const setVisibilityFilter = filter => ({
   type: SET_VISIBILITY_FILTER,
@@ -57,8 +63,13 @@ export default function todoReducer(state = initialState, action) {
         ]
       };
 
-
     // TODO_TASKS
+
+    case SET_TODO_LIST_TASKS:
+      return {
+        ...state,
+        tasks: action.tasks
+      };
 
     case ADD_TODO:
       return {
@@ -128,12 +139,21 @@ export const visibilityFilter = (state = SHOW_ALL, action) => {
   }
 };
 
+const errMessage = (response, dispatch, action) => {
+  let message =
+    response.data.messages.length > 0
+      ? response.data.messages[0]
+      : "Some error";
+  dispatch(action({ error: message }));
+};
+
 export const requestTodoLists = () => async dispatch => {
   const response = await todoAPI.getTodoLists();
   if (response.data !== null) {
     dispatch(setTodoLists(response.data));
+  } else {
+    dispatch(setTodoLists([{ id: 0, title: "Create your first TODOLIST" }]));
   }
-  else {dispatch(setTodoLists([{ id: 0, title: "Create your first TODOLIST" }])); }
 };
 
 export const postTodoList = title => async dispatch => {
@@ -141,11 +161,7 @@ export const postTodoList = title => async dispatch => {
   if (response.data.resultCode === 0) {
     dispatch(addTodoList(response.data.data.item));
   } else {
-    let message =
-      (response.data.messages.length > 0)
-        ? response.data.messages[0]
-        : "Some error";
-    dispatch(setTodoLists({ error: message }));
+    errMessage(response, dispatch, errTodoList);
   }
 };
 
@@ -154,11 +170,7 @@ export const deleteTodoList = todolistId => async dispatch => {
   if (response.data.resultCode === 0) {
     dispatch(requestTodoLists());
   } else {
-    let message =
-      (response.data.messages.length > 0)
-        ? response.data.messages[0]
-        : "Some error";
-    dispatch(setTodoLists({ error: message }));
+    errMessage(response, dispatch, errTodoList);
   }
 };
 
@@ -167,10 +179,27 @@ export const putTodoList = (todolistId, title) => async dispatch => {
   if (response.data.resultCode === 0) {
     dispatch(requestTodoLists());
   } else {
-    let message =
-      (response.data.messages.length > 0)
-        ? response.data.messages[0]
-        : "Some error";
-    dispatch(setTodoLists({ error: message }));
+    errMessage(response, dispatch, errTodoList);
+  }
+};
+
+export const putTodoListReorder = (
+  todolistId,
+  putAfterItemId
+) => async dispatch => {
+  const response = await todoAPI.putTodoList(todolistId, putAfterItemId);
+  if (response.data.resultCode === 0) {
+    dispatch(requestTodoLists());
+  } else {
+    errMessage(response, dispatch, errTodoList);
+  }
+};
+
+export const requestTodoListTasks = () => async dispatch => {
+  const response = await todoAPI.getTodoListTasks();
+  if (response.data !== null) {
+    dispatch(setTodoListTasks(response.data));
+  } else {
+    dispatch(setTodoListTasks([{ id: 0, title: "Create your first Task!" }]));
   }
 };
