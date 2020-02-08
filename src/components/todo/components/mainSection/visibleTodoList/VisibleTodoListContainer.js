@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import * as TodoActions from '../../../actions'
 import TodoList from './TodoList'
 import { getVisibleTodos } from '../../../../../redux/todo-selectors'
+import { requestTodoListTasks } from '../../../../../redux/todo-reducer'
 
 
 const mapStateToProps = state => ({
@@ -10,7 +11,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(TodoActions, dispatch)
+  actions: bindActionCreators(TodoActions, dispatch),
+  requestTodoListTasks
 })
 
 

@@ -15,5 +15,5 @@ export default function Preloader() {
 return <Backdrop className={classes.backdrop} open={true}>
         <img alt='...loading' src={preloader} />
       </Backdrop>
+      }
       
-}

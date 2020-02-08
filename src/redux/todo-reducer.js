@@ -195,9 +195,18 @@ export const putTodoListReorder = (
   }
 };
 
-export const requestTodoListTasks = () => async dispatch => {
-  const response = await todoAPI.getTodoListTasks();
-  if (response.data !== null) {
+export const requestTodoListTasks = (todolistId, count, page) => async dispatch => {
+  const response = await todoAPI.getTodoListTasks(todolistId, count, page);
+  if (response.data.resultCode === 0) {
+    dispatch(setTodoListTasks(response.data));
+  } else {
+    dispatch(setTodoListTasks([{ id: 0, title: "Create your first Task!" }]));
+  }
+};
+
+export const postTodoListTasks = (todolistId, title) => async dispatch => {
+  const response = await todoAPI.postTodoListTasks(todolistId, title);
+  if (response.data.resultCode === 0) {
     dispatch(setTodoListTasks(response.data));
   } else {
     dispatch(setTodoListTasks([{ id: 0, title: "Create your first Task!" }]));
