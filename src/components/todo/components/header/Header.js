@@ -1,34 +1,60 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import TodoTextInput from '../common/TodoTextInput'
-import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+import React from "react";
+import PropTypes from "prop-types";
+import TodoTextInput from "../common/TodoTextInput";
+import TodoLists from "./TodoLists";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   main: {
-
-  },
-
+    padding: 20
+  }
 }));
 
-const Header = ({ addTodo }) => {
+const Header = ({
+  todoLists,
+  addTodo,
+  requestTodoLists,
+  postTodoList,
+  deleteTodoList,
+  putTodoList
+}) => {
   const classes = useStyles();
-  return <header>
-    <Typography variant="h6" component="h6">todos</Typography>
-    <TodoTextInput
-      newTodo
-      onSave={(text) => {
-        if (text.length !== 0) {
-          addTodo(text)
-        }
-      }}
-      placeholder="What needs to be done?"
-    />
-  </header>
-}
+  const saveText = text => {
+    if (text.length !== 0) {
+      addTodo(text);
+    }
+  };
+
+  if (todoLists.length === 0) {
+    requestTodoLists();
+  }
+
+  return (
+    <header>
+      <div className={classes.main}>
+        <TodoLists
+          todoLists={todoLists}
+          postTodoList={postTodoList}
+          requestTodoLists={requestTodoLists}
+          deleteTodoList={deleteTodoList}
+          putTodoList={putTodoList}
+        />
+      </div>
+
+      <div className={classes.main}>
+        <TodoTextInput
+          newTodo
+          label="New task"
+          onSave={saveText}
+          placeholder="What needs to be done?"
+        />
+      </div>
+    </header>
+  );
+};
 
 Header.propTypes = {
   addTodo: PropTypes.func.isRequired
-}
+};
 
-export default Header
+export default Header;

@@ -1,9 +1,6 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import cn from 'classnames'
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import TextField from "@material-ui/core/TextField";
 
 export default class TodoTextInput extends Component {
   static propTypes = {
@@ -11,49 +8,49 @@ export default class TodoTextInput extends Component {
     text: PropTypes.string,
     placeholder: PropTypes.string,
     editing: PropTypes.bool,
-    newTodo: PropTypes.bool
-  }
+    newTodo: PropTypes.bool,
+    label: PropTypes.string
+  };
 
   state = {
-    text: this.props.text || ''
-  }
+    text: this.props.text || ""
+  };
 
   handleSubmit = e => {
-    const text = e.target.value.trim()
+    const text = e.target.value.trim();
     if (e.which === 13) {
-      this.props.onSave(text)
+      this.props.onSave(text);
       if (this.props.newTodo) {
-        this.setState({ text: '' })
+        this.setState({ text: "" });
       }
     }
-  }
+  };
 
   handleChange = e => {
-    this.setState({ text: e.target.value })
-  }
+    this.setState({ text: e.target.value });
+  };
 
   handleBlur = e => {
     if (!this.props.newTodo) {
-      this.props.onSave(e.target.value)
+      this.props.onSave(e.target.value);
     }
-  }
+  };
 
   render() {
-
     return (
-      <Paper>
-        <TextField id="outlined-basic" label="New todo" variant="outlined"
-          className={cn({
-            'style.edit': this.props.editing,
-            'style.new_todo': this.props.newTodo
-          })}
+      <div>
+        <TextField
+          id="outlined-basic"
+          variant="outlined"
+          label={this.props.label}
           placeholder={this.props.placeholder}
           autoFocus={true}
           value={this.state.text}
           onBlur={this.handleBlur}
           onChange={this.handleChange}
-          onKeyDown={this.handleSubmit} />
-      </Paper>
-    )
+          onKeyDown={this.handleSubmit}
+        />
+      </div>
+    );
   }
 }

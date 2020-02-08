@@ -51,10 +51,6 @@ export default function Header({ isAuth, login, logout }) {
     logout()
   }
 
-  const toLogin = React.forwardRef((props, ref) => (
-    <NavLink innerRef={ref} to={'/login'} {...props} />
-  ))
-
   return (
     <div className={classes.root}>
       <AppBar position="static">

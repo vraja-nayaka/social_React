@@ -2,11 +2,11 @@ import { connect } from 'react-redux'
 import * as TodoActions from '../../actions'
 import { bindActionCreators } from 'redux'
 import MainSection from './MainSection'
-import { getCompletedTodoCount } from '../../selectors'
+import { getCompletedTodoCount } from '../../../../redux/todo-selectors'
 
 
 const mapStateToProps = state => ({
-  todosCount: state.todos.length,
+  todosCount: state.todo.tasks.length,
   completedCount: getCompletedTodoCount(state)
 })
 

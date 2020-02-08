@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import cn from 'classnames'
 import TodoTextInput from '../../common/TodoTextInput'
 import style from '../mainSection.module.css'
 
@@ -36,6 +35,7 @@ export default class TodoItem extends Component {
     if (this.state.editing) {
       element = (
         <TodoTextInput text={todo.text}
+                       label="Edit task"
                        editing={this.state.editing}
                        onSave={(text) => this.handleSave(todo.id, text)} />
       )
@@ -49,17 +49,14 @@ export default class TodoItem extends Component {
           <label onDoubleClick={this.handleDoubleClick}>
             {todo.text}
           </label>
-          <button className={style.destroy}
+          <button variant="outlined" color="inherit" className={style.destroy}
                   onClick={() => deleteTodo(todo.id)} />
         </div>
       )
     }
 
     return (
-      <li className={cn({
-        completed: todo.completed,
-        editing: this.state.editing
-      })}>
+      <li >
         {element}
       </li>
     )

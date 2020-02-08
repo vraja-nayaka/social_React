@@ -2,11 +2,11 @@ const SEND_MESSAGE = 'SEND_MESSAGE';
 
 let initialState = {
   dialogs: [
-    { id: 1, name: "Леха" },
-    { id: 2, name: "Игорь" },
-    { id: 3, name: "Никита" },
-    { id: 4, name: "Хари" },
-    { id: 5, name: "Василий" }
+    { id: 1, name: "Alexei" },
+    { id: 2, name: "George" },
+    { id: 3, name: "Valentine" },
+    { id: 4, name: "Toni" },
+    { id: 5, name: "Winston" }
   ],
   messages: [
     { id: 1, message: "Привет" },
