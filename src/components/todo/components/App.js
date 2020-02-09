@@ -4,7 +4,7 @@ import MainSectionContainer from './mainSection/MainSectionContainer'
 import style from './todo.module.css'
 
 const App = () => (
-  <div className={style.todoapp}>
+  <div >
     <HeaderContainer />
     <MainSectionContainer />
   </div>

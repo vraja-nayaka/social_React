@@ -23,8 +23,11 @@ const UsersContainer = React.lazy(() =>
 const WellcomePage = React.lazy(() =>
   import('./components/wellcome/WellcomePage')
 )
+// const TodoPage = React.lazy(() =>
+//   import('./components/todo/components/App')
+// )
 const TodoPage = React.lazy(() =>
-  import('./components/todo/components/App')
+  import('./components/todo/Todo')
 )
 // const Music = React.lazy(() => import('./components/music/Music'))
 
