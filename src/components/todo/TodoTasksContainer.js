@@ -1,22 +1,38 @@
 import { connect } from 'react-redux'
-import * as TodoActions from '../../actions'
+import * as TodoActions from './actions'
 import { bindActionCreators } from 'redux'
-import MainSection from './MainSection'
-import { getCompletedTodoCount } from '../../../../redux/todo-selectors'
-
+import TodoTasks from './tasks/TodoTasks'
+import { getCompletedTodoCount } from '../../redux/todo-selectors'
+import { getVisibleTodos } from '../../redux/todo-selectors'
+import { requestTodoListTasks } from '../../redux/todo-reducer'
+import {
+  requestTodoLists,
+  addTodo,
+  postTodoList,
+  deleteTodoList,
+  putTodoList
+} from "../../redux/todo-reducer";
 
 const mapStateToProps = state => ({
+  todoLists: state.todo.todoLists,
   todosCount: state.todo.tasks.length,
-  completedCount: getCompletedTodoCount(state)
+  completedCount: getCompletedTodoCount(state),
+  filteredTodos: getVisibleTodos(state)
 })
 
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(TodoActions, dispatch)
+  actions: bindActionCreators(TodoActions, dispatch),
+  requestTodoListTasks,
+  addTodo,
+  requestTodoLists,
+  postTodoList,
+  deleteTodoList,
+  putTodoList
 })
 
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MainSection)
+)(TodoTasks)

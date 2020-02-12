@@ -8,7 +8,9 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
-  root: {}
+  root: {
+    flexDirection: "row"
+  }
 }));
 
 const TodoLists = ({
@@ -25,14 +27,15 @@ const TodoLists = ({
       postTodoList(title);
     }
   };
+  if (todoLists.length === 0) {
+    requestTodoLists();
+  }
+
   return (
     <>
-      <Button variant="contained" color="primary" onClick={requestTodoLists}>
-        Request Lists
-      </Button>
-      <Grid container className={classes.root} spacing={2}>
+      <Grid container>
         {todoLists.map(item => (
-          <Grid item xs={3} key={item.id}>
+          <Grid className={classes.root} item xs={3} key={item.id}>
             <Button variant="contained" color="secondary" size="small">
               {item.title}
               <IconButton
@@ -43,7 +46,7 @@ const TodoLists = ({
                 <DeleteIcon fontSize="small" color="disabled" />
               </IconButton>
               <IconButton
-                aria-label="delete"
+                aria-label="rename"
                 onClick={() => putTodoList(item.id, "renamed title")}
               >
                 <EditIcon fontSize="small" />
@@ -51,15 +54,12 @@ const TodoLists = ({
             </Button>
           </Grid>
         ))}
-
-        <div>
-          <TodoTextInput
-            newTodo
-            label="New todo List"
-            onSave={newTodoList}
-            placeholder="New todo List?"
-          />
-        </div>
+        <TodoTextInput
+          newTodo
+          label="New todo List"
+          onSave={newTodoList}
+          placeholder="New todo List?"
+        />
       </Grid>
     </>
   );
