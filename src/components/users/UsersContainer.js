@@ -19,7 +19,6 @@ import { connect } from 'react-redux'
 import Users from './Users'
 import Preloader from './../common/preloader/Preloader'
 import { compose } from 'redux'
-import { withAuthRedirect } from './../../hoc/withAuthRedirect'
 
 class UsersAPIComponent extends React.Component {
   componentDidMount() {

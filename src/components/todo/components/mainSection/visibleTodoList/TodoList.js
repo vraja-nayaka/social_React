@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
 import style from '../mainSection.module.css';
-import Button from "@material-ui/core/Button";
 
 const TodoList = ({ filteredTodos, actions, requestTodoListTasks }) => (
   <>

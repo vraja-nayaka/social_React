@@ -30,6 +30,7 @@ const Pagenation = ({
           {pagesList > 1 && (
             <Button
               variant="contained"
+              color="primary"
               size="small"
               onClick={() => {
                 setPagesList(pagesList - 1)
@@ -66,7 +67,7 @@ const Pagenation = ({
 
 const PageNumbers = ({ onPageChanged, pages, currentPage }) => {
   return pages.map(p => {
-    const isSelected = p === currentPage ? 'secondary' : ''
+    const isSelected = p === currentPage ? 'secondary' : 'default'
     return (
       <Button
         variant="contained"
@@ -109,6 +110,7 @@ const Users = props => {
     follow={follow}
     followingInProgress={followingInProgress}
     isAuth={isAuth}
+    key={u.id}
     />
         ))}
       </div>

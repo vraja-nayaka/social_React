@@ -21,10 +21,3 @@ body {
   display: grid;
   grid-template-columns: 2fr 8fr;
 }
-
-.dialogs_items {}
-
-.messages {}
-
-.my_posts {
-}

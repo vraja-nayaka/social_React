@@ -51,8 +51,8 @@ export default withRouter(function Navbar({ location }) {
   }, [path])
 
   return (
-    <div className={!matches && classes.root}>
-      <Paper className={!matches && classes.paper}>
+    <div className={!matches ? classes.root : undefined}>
+      <Paper className={!matches ? classes.paper : undefined}>
         <BottomNavigation value={value} showLabels>
           <BottomNavigationAction
             label="Profile"
