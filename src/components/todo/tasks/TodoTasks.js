@@ -7,6 +7,7 @@ import TodoTextInput from "../common/TodoTextInput";
 
 
 const TodoTasks = ({
+  todolistId,
   filteredTodos,
   actions,
   requestTodoListTasks,
@@ -15,13 +16,13 @@ const TodoTasks = ({
   todoLists,
   addTodo,
   requestTodoLists,
-  postTodoList,
+  postTodoListTasks,
   deleteTodoList,
   putTodoList
 }) => {
-  const saveText = text => {
+  const saveText = (todolistId, text) => {
     if (text.length !== 0) {
-      addTodo(text);
+      postTodoListTasks(todolistId, text);
     }
   };
   return  <>

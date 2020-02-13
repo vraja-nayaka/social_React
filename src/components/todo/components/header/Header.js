@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TodoTextInput from "../common/TodoTextInput";
-import TodoLists from "./TodoLists";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -13,10 +12,7 @@ const useStyles = makeStyles(theme => ({
 const Header = ({
   todoLists,
   addTodo,
-  requestTodoLists,
-  postTodoList,
-  deleteTodoList,
-  putTodoList
+  requestTodoLists
 }) => {
   const classes = useStyles();
   const saveText = text => {
@@ -31,17 +27,7 @@ const Header = ({
 
   return (
     <header>
-      <div className={classes.main}>
-        <TodoLists
-          todoLists={todoLists}
-          postTodoList={postTodoList}
-          requestTodoLists={requestTodoLists}
-          deleteTodoList={deleteTodoList}
-          putTodoList={putTodoList}
-        />
-      </div>
-
-      <div className={classes.main}>
+       <div className={classes.main}>
         <TodoTextInput
           newTodo
           label="New task"

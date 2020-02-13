@@ -8,7 +8,7 @@ import { requestTodoListTasks } from '../../redux/todo-reducer'
 import {
   requestTodoLists,
   addTodo,
-  postTodoList,
+  postTodoListTasks,
   deleteTodoList,
   putTodoList
 } from "../../redux/todo-reducer";
@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => ({
   requestTodoListTasks,
   addTodo,
   requestTodoLists,
-  postTodoList,
+  postTodoListTasks,
   deleteTodoList,
   putTodoList
 })
