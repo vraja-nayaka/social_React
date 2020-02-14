@@ -1,15 +1,16 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import IconButton from '@material-ui/core/IconButton'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
-import MenuIcon from '@material-ui/icons/Menu'
-import AccountCircle from '@material-ui/icons/AccountCircle'
-import MenuItem from '@material-ui/core/MenuItem'
-import Menu from '@material-ui/core/Menu'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import MenuIcon from "@material-ui/icons/Menu";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,36 +21,37 @@ const useStyles = makeStyles(theme => ({
   },
   toolbar: {
     minHeight: 128,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
     paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
+    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
   },
   title: {
     flexGrow: 1,
-    alignSelf: 'flex-end',
-    '& a': {
-      textDecoration: 'none',
-      color: 'white'
+    alignSelf: "flex-end",
+    "& a": {
+      textDecoration: "none",
+      color: "white"
     }
   }
-}))
+}));
 
-export default function Header({ isAuth, login, logout }) {
-  const classes = useStyles()
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const open = Boolean(anchorEl)
+export default function Header({ isAuth, login, logout, toggleTheme }) {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
   const handleMenu = event => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClose = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
   const loginingOut = () => {
-    setAnchorEl(null)
-    logout()
-  }
+    setAnchorEl(null);
+    logout();
+  };
 
   return (
     <div className={classes.root}>
@@ -63,11 +65,20 @@ export default function Header({ isAuth, login, logout }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h5" noWrap >
-            <NavLink to={'/'}>SamuraiJS</NavLink>
+          <Typography className={classes.title} variant="h5" noWrap>
+            <NavLink to={"/"}>SamuraiJS</NavLink>
           </Typography>
           {isAuth && (
             <div>
+              <IconButton
+                aria-label="toggle theme color"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={toggleTheme}
+                color="inherit"
+              >
+                <Brightness4Icon />
+              </IconButton>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -81,13 +92,13 @@ export default function Header({ isAuth, login, logout }) {
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
+                  vertical: "top",
+                  horizontal: "right"
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
+                  vertical: "top",
+                  horizontal: "right"
                 }}
                 open={open}
                 onClose={handleClose}
@@ -103,17 +114,22 @@ export default function Header({ isAuth, login, logout }) {
                   Logout
                 </MenuItem>
               </Menu>
-              <div> {login} </div>
+              {login}
             </div>
           )}
 
           {!isAuth && (
-            <Button variant="outlined" color="inherit" component={NavLink} to="/login">
+            <Button
+              variant="outlined"
+              color="inherit"
+              component={NavLink}
+              to="/login"
+            >
               login
             </Button>
           )}
         </Toolbar>
       </AppBar>
     </div>
-  )
+  );
 }
