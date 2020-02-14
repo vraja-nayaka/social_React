@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "flex-start",
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(2),
-    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
+    background: theme.palette.primary.mainGradient
   },
   title: {
     flexGrow: 1,

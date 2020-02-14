@@ -6,17 +6,14 @@ export const theme = responsiveFontSizes(
   createMuiTheme({
     palette: {
       primary: {
-        main: "#556cd6"
+        main: "#556cd6",
+        mainGradient: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
       },
       secondary: {
-        light: "#ffcc00",
         main: "#19857b"
       },
       error: {
         main: red.A400
-      },
-      background: {
-        default: "#fff"
       }
     },
     typography: {
@@ -35,10 +32,18 @@ export const theme = responsiveFontSizes(
     }
   })
 );
+
 export const darkTheme = responsiveFontSizes(
   createMuiTheme({
     palette: {
-      type: "dark"
+      type: "dark",
+      primary: {
+        main: "#556cd6",
+        mainGradient: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
+      },
+      secondary: {
+        main: "#19857b"
+      }
     },
     typography: {
       fontFamily: [

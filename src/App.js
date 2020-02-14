@@ -11,6 +11,7 @@ import { withSuspense } from "./hoc/withSuspense";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 import { theme, darkTheme } from "./theme";
 
 import Container from "@material-ui/core/Container";
@@ -32,7 +33,6 @@ const TodoPage = React.lazy(() => import("./components/todo/components/App"));
 //   import('./components/todo/Todo')
 // )
 
-
 class App extends React.Component {
   componentDidMount() {
     this.props.initializeApp();
@@ -46,32 +46,34 @@ class App extends React.Component {
       <ThemeProvider theme={this.props.isDarkTheme ? darkTheme : theme}>
         <CssBaseline />
         <Container fixed maxWidth="md">
-          <div style={{ paddingBottom: 55 }}>
-            <HeaderContainer />
-            <NavbarConteiner />
-            {this.props.initialized ? null : <div>initializing...</div>}
-            <div className="content">
-              <Route path="/" exact render={withSuspense(WellcomePage)} />
-              <Route
-                path="/profile/:userId?"
-                render={withSuspense(ProfileContainer)}
-              />
-              <Route path="/todo" render={withSuspense(TodoPage)} />
-              <Route
-                path="/dialogs/:dialogId?"
-                render={withSuspense(DialogsContainer)}
-              />
-              <Route path="/users" render={withSuspense(UsersContainer)} />
-              <Route path="/login" render={() => <LoginPage />} />
+          <Paper>
+            <div style={{ paddingBottom: 55 }}>
+              <HeaderContainer />
+              <NavbarConteiner />
+              {this.props.initialized ? null : <div>initializing...</div>}
+              <div className="content">
+                <Route path="/" exact render={withSuspense(WellcomePage)} />
+                <Route
+                  path="/profile/:userId?"
+                  render={withSuspense(ProfileContainer)}
+                />
+                <Route path="/todo" render={withSuspense(TodoPage)} />
+                <Route
+                  path="/dialogs/:dialogId?"
+                  render={withSuspense(DialogsContainer)}
+                />
+                <Route path="/users" render={withSuspense(UsersContainer)} />
+                <Route path="/login" render={() => <LoginPage />} />
+              </div>
             </div>
-          </div>
+          </Paper>
         </Container>
       </ThemeProvider>
     );
   }
 }
 
-const mapStateToProps = ({app: {initialized, isDarkTheme}}) => ({
+const mapStateToProps = ({ app: { initialized, isDarkTheme } }) => ({
   initialized,
   isDarkTheme
 });

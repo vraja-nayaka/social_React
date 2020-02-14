@@ -8,26 +8,9 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 
-
 const useStyles = makeStyles(theme => ({
-  text: {
-    padding: theme.spacing(2, 2, 0)
-  },
-  paper: {
-    paddingBottom: 60
-  },
-  list: {
-    marginBottom: theme.spacing(2)
-  },
-  subheader: {
-    backgroundColor: theme.palette.background.paper
-  },
-  appBar: {
-    top: "auto",
-    bottom: 0
-  },
-  grow: {
-    flexGrow: 1
+  root: {
+    paddingBottom: 20
   }
 }));
 
@@ -55,8 +38,8 @@ const Dialogs = ({ dialogs }) => {
   ));
 
   return (
-    <div>
-      <Paper square className={classes.paper}>
+    <div className={classes.root}>
+      <Paper square >
         {DialogsElements}
       </Paper>
     </div>
