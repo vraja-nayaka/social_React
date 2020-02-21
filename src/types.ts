@@ -29,3 +29,11 @@ export type PostType = {
     message: string
     likesCount: number
 }
+
+export type UserType = {
+    id: string
+    name: string
+    status: string
+    photos: PhotosType
+    followed: boolean
+  }

@@ -4,7 +4,7 @@ import profileReducer from "./profile-reducer";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
 import appReducer from "./app-reducer";
-import todoReducer, {visibilityFilter} from "./todo-reducer";
+import todoReducer from "./todo-reducer";
 import thunkMiddleware from "redux-thunk";
 import { reducer as formReducer } from 'redux-form';
 import {compose} from "redux";
@@ -18,7 +18,6 @@ const reducers = combineReducers({
   form: formReducer,
   app: appReducer,
   todo: todoReducer,
-  visibilityFilter: visibilityFilter
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

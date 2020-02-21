@@ -5,11 +5,21 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexDirection: "row"
+    width: "auto",
+    overflow: "hidden",
+    overflowX: "scroll",
+    whiteSpace: "nowrap"
+  },
+  child: {
+    display: "inline-block",
+    verticalAlign: "top",
+    width: 220,
+    height: 60
   }
 }));
 
@@ -33,10 +43,10 @@ const TodoLists = ({
 
   return (
     <>
-      <Grid container>
+      <div className={classes.root}>
         {todoLists.map(item => (
-          <Grid className={classes.root} item xs={3} key={item.id}>
-            <Button variant="contained" color="secondary" size="small">
+          <div className={classes.child} key={item.id}>
+            <Paper>
               {item.title}
               <IconButton
                 aria-label="delete"
@@ -51,19 +61,20 @@ const TodoLists = ({
               >
                 <EditIcon fontSize="small" />
               </IconButton>
-            </Button>
-
-{/* !!TASKS HERE! */}
-
-          </Grid>
+              <div>Tasks here</div>
+            </Paper>
+          
+          </div>
         ))}
-        <TodoTextInput
-          newTodo
-          label="New todo List"
-          onSave={newTodoList}
-          placeholder="New todo List?"
-        />
-      </Grid>
+        <div className={classes.child}>
+          <TodoTextInput
+            newTodo
+            label="New todo List"
+            onSave={newTodoList}
+            placeholder="New todo List?"
+          />
+        </div>
+      </div>
     </>
   );
 };

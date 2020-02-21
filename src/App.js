@@ -28,10 +28,10 @@ const UsersContainer = React.lazy(() =>
 const WellcomePage = React.lazy(() =>
   import("./components/wellcome/WellcomePage")
 );
-const TodoPage = React.lazy(() => import("./components/todo/components/App"));
-// const TodoPage = React.lazy(() =>
-//   import('./components/todo/Todo')
-// )
+// const TodoPage = React.lazy(() => import("./components/todo/components/App"));
+const TodoPage = React.lazy(() =>
+  import('./components/todo/Todo')
+)
 
 class App extends React.Component {
   componentDidMount() {

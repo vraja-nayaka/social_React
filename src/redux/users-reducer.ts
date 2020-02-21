@@ -1,5 +1,5 @@
 import { usersAPI } from './../api/api';
-import { PhotosType } from '../types';
+import { UserType } from '../types';
 
 const UNFOLLOW = 'UNFOLLOW';
 const FOLLOW = 'FOLLOW';
@@ -9,14 +9,6 @@ const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETHING = 'TOGGLE_IS_FETHING';
 const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS';
 
-
-type UserType = {
-  id: string
-  name: string
-  status: string
-  photos: PhotosType
-  followed: boolean
-}
 
 type InitialStateType = typeof initialState
 export const initialState = {
