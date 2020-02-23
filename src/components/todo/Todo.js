@@ -1,11 +1,11 @@
 import React from 'react';
 import TodoListsContainer from './TodoListsContainer';
-// import TodoTasksContainer from './TodoTasksContainer';
+import TodoTasksContainer from './TodoTasksContainer';
 
 const Todo = () => (
     <>
-        <TodoListsContainer/>
-        {/* <TodoTasksContainer/> */}
+        {/* <TodoListsContainer/> */}
+        <TodoTasksContainer/>
     </>
 )
 
