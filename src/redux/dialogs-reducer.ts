@@ -1,6 +1,6 @@
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
-type DialogsType = {
+export type DialogsType = {
   id: number
   name: string
 }

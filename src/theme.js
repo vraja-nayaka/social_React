@@ -39,7 +39,7 @@ export const darkTheme = responsiveFontSizes(
       type: "dark",
       primary: {
         main: "#556cd6",
-        mainGradient: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
+        mainGradient: 'linear-gradient(25deg, #263238 25%, #303f9f 75%)'
       },
       secondary: {
         main: "#19857b"

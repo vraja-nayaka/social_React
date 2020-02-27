@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, NavLinkProps } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -7,6 +7,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
+import { Omit } from '@material-ui/types';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,10 +15,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Dialog = ({ id, name }) => {
-  const pathLink = React.forwardRef((props, ref) => (
+type DialogProps = {
+  id: number
+  name: string
+}
+
+
+const Dialog: React.FC<DialogProps> = ({ id, name }) => {
+
+  const pathLink = React.forwardRef<any, Omit<NavLinkProps, 'to'>>((props, ref?: React.Ref<HTMLAnchorElement>) => (
     <NavLink innerRef={ref} to={"/dialogs/" + id} {...props} />
   ));
+
   return (
     <div>
       <ListItem button component={pathLink}>
@@ -30,7 +39,11 @@ const Dialog = ({ id, name }) => {
   );
 };
 
-const Dialogs = ({ dialogs }) => {
+type DialogsPropsType = {
+  dialogs: Array<DialogProps>
+}
+
+const Dialogs: React.FC<DialogsPropsType> = ({ dialogs }) => {
   const classes = useStyles();
 
   const DialogsElements = dialogs.map(({ id, name }) => (
