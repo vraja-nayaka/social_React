@@ -91,7 +91,7 @@ type SetCurrentPageActionType = {
   type: typeof SET_CURRENT_PAGE
   currentPage: number
 }
-export const setCurrentPage = (currentPage: number): SetCurrentPageActionType => ({ type: SET_CURRENT_PAGE, currentPage });
+const setCurrentPage = (currentPage: number): SetCurrentPageActionType => ({ type: SET_CURRENT_PAGE, currentPage });
 
 type SetTotalUsersCountActionType = {
   type: typeof SET_TOTAL_USERS_COUNT
@@ -110,7 +110,7 @@ type ToggleFollowingInProgressActionType = {
   isFetching: boolean
   userId: number
 }
-export const toggleFollowingInProgress = (isFetching: boolean, userId: number): ToggleFollowingInProgressActionType => ({ type: TOGGLE_FOLLOWING_PROGRESS, isFetching, userId });
+const toggleFollowingInProgress = (isFetching: boolean, userId: number): ToggleFollowingInProgressActionType => ({ type: TOGGLE_FOLLOWING_PROGRESS, isFetching, userId });
 
 export const requestUsers = (page: number, pageSize: number) => {
   return (dispatch: any) => {

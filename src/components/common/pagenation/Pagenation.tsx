@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
-import style from './users.module.css'
-import UserCard from './UserCard'
-
 import Button from '@material-ui/core/Button'
+import style from '../../users/users.module.css'
 
-const Pagenation = ({
+type PagenationProps = {
+  totalUsersCount: number
+  pageSize: number
+  onPageChanged: (pageNumber: number) => void
+  currentPage: number
+}
+
+export const Pagenation: React.FC<PagenationProps> = ({
   totalUsersCount,
   pageSize,
   onPageChanged,
@@ -65,60 +70,29 @@ const Pagenation = ({
   )
 }
 
-const PageNumbers = ({ onPageChanged, pages, currentPage }) => {
-  return pages.map(p => {
-    const isSelected = p === currentPage ? 'secondary' : 'default'
-    return (
-      <Button
-        variant="contained"
-        color={isSelected}
-        size="small"
-        key={p}
-        onClick={e => {
-          onPageChanged(p)
-        }}
-      >
-        {p}
-      </Button>
-    )
-  })
+type PageNumbersProps = {
+  onPageChanged: (pageNumber: number) => void
+  pages: Array<number>
+  currentPage: number
 }
 
-const Users = props => {
-  const {
-    totalUsersCount,
-    pageSize,
-    currentPage,
-    onPageChanged,
-    users,
-    unfollow,
-    follow,
-    followingInProgress,
-    isAuth
-  } = props
-  return (
-    <div>
-      <div className={style.container}>
-        <Pagenation
-          totalUsersCount={totalUsersCount}
-          pageSize={pageSize}
-          onPageChanged={onPageChanged}
-          currentPage={currentPage}
-        />
-        {users.map(u => (
-<UserCard u={u} unfollow={unfollow}
-    follow={follow}
-    followingInProgress={followingInProgress}
-    isAuth={isAuth}
-    key={u.id}
-    />
-        ))}
-      </div>
-    </div>
-  )
+const PageNumbers: React.FC<PageNumbersProps> = ({ onPageChanged, pages, currentPage }) => {
+  return <>
+    {pages.map(p => {
+      const isSelected = p === currentPage ? 'secondary' : 'default'
+      return (
+        <Button
+          variant="contained"
+          color={isSelected}
+          size="small"
+          key={p}
+          onClick={e => {
+            onPageChanged(p)
+          }}
+        >
+          {p}
+        </Button>
+      )
+    })}
+  </>
 }
-
-
-
-
-export default Users
