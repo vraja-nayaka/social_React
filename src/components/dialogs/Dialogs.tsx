@@ -20,7 +20,6 @@ type DialogProps = {
   name: string
 }
 
-
 const Dialog: React.FC<DialogProps> = ({ id, name }) => {
 
   const pathLink = React.forwardRef<any, Omit<NavLinkProps, 'to'>>((props, ref?: React.Ref<HTMLAnchorElement>) => (

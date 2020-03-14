@@ -31,7 +31,7 @@ export type PostType = {
 }
 
 export type UserType = {
-    id: string
+    id: number
     name: string
     status: string
     photos: PhotosType

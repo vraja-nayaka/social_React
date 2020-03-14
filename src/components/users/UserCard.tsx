@@ -5,51 +5,60 @@ import style from './users.module.css'
 import Card from '@material-ui/core/Card'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
+import { UserType } from '../../types'
 
-export default function UserCard(props) {
-  const { u, unfollow, follow, followingInProgress, isAuth } = props
-  const Link = ({ children, ...props }) => {
+type UserCardProps = {
+  user: UserType,
+  unfollow: (userId: number) => void,
+  follow: (userId: number) => void,
+  followingInProgress: Array<number>,
+  isAuth: boolean 
+}
+
+  export const UserCard: React.FC<UserCardProps> = ({ user, unfollow, follow, followingInProgress, isAuth }) => {
+  
+    const Link: React.FC<any> = ({ children }) => {
     return (
       <div>
-        <NavLink to={'/profile/' + u.id}>{children}</NavLink>
+        <NavLink to={'/profile/' + user.id}>{children}</NavLink>
       </div>
     )
   }
+
   return (
     <Card className={style.users}>
       <div className={style.userAvatar}>
         <Link>
           <img
             alt="User Avatar"
-            src={u.photos.small != null ? u.photos.small : noAvatar}
+            src={user.photos.small != null ? user.photos.small : noAvatar}
           />
         </Link>
       </div>
       <Link>
         <IconButton color="primary" size="small">
-          {u.name}
+          {user.name}
         </IconButton>
       </Link>
       {isAuth ? (
         <div>
-          {u.followed ? (
+          {user.followed ? (
             <IconButton
               size="small"
-              disabled={followingInProgress.some(id => id === u.id)}
+              disabled={followingInProgress.some(id => id === user.id)}
               onClick={() => {
-                unfollow(u.id)
+                unfollow(user.id)
               }}
             >
               Unfollow
             </IconButton>
           ) : (
             <IconButton
-              variant="contained"
               color="secondary"
               size="small"
-              disabled={followingInProgress.some(id => id === u.id)}
+              disabled={followingInProgress.some(id => id === user.id)}
               onClick={() => {
-                follow(u.id)
+                follow(user.id)
               }}
             >
               Follow
@@ -59,7 +68,7 @@ export default function UserCard(props) {
       ) : null}
       <div>
         <Typography variant="subtitle1" component="div">
-          <i> Status: </i> {u.status}
+          <i> Status: </i> {user.status}
         </Typography>
       </div>
     </Card>
