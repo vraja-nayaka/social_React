@@ -9,6 +9,7 @@ import thunkMiddleware from "redux-thunk";
 import { reducer as formReducer } from 'redux-form';
 import { compose } from "redux";
 
+export type GlobalState = typeof rootReducer;
 
 const rootReducer = combineReducers({
   dialogsPage: dialogsReducer,
